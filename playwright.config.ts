@@ -9,6 +9,7 @@ export default defineConfig({
     baseURL: 'http://localhost:3030',
     viewport: { width: 1440, height: 900 },
     channel: process.env.PLAYWRIGHT_CHANNEL || undefined,
+    permissions: ['screen-wake-lock'],
     screenshot: 'only-on-failure',
   },
   webServer: {
