@@ -4,6 +4,7 @@ title: 北京理工大学 Slidev 主题
 author: Wenbin Xu
 lang: zh-CN
 download: false
+preloadImages: false
 presenter: 北小理
 advisor: 京小工
 date: 2026 年 10 月
