@@ -1,0 +1,14 @@
+node_modules/
+dist/
+dist-starter/
+.slidev/
+.work/
+test-results/
+playwright-report/
+*.tgz
+*.pdf
+*.pptx
+*.ppt
+.DS_Store
+.env
+.env.*
