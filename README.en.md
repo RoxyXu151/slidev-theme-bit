@@ -61,7 +61,7 @@ Use the arrow keys to navigate, `P` for presenter view, `O` for the overview, an
 Install the theme from GitHub. **These instructions do not require or assume publication to npm.**
 
 ```bash
-npm install github:RoxyXu151/slidev-theme-bit#v0.1.0
+npm install github:RoxyXu151/slidev-theme-bit#v0.1.1
 ```
 
 Add the following configuration to the first slide of your project:

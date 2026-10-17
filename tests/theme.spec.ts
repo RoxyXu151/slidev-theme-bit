@@ -61,6 +61,32 @@ test('TOC links navigate to the intended section', async ({ page }) => {
   await expect(page).toHaveURL(/\/8$/)
 })
 
+test('minimal header keeps the section number inside its badge at different display sizes', async ({ page }) => {
+  for (const viewport of [{ width: 1280, height: 720 }, { width: 800, height: 450 }]) {
+    await page.setViewportSize(viewport)
+    await page.goto('/16')
+    const header = page.locator('#slide-content .slidev-page-16 .bit-header')
+    await expect(header).toBeVisible()
+    await page.evaluate(() => document.fonts.ready)
+    await expect(header.locator('.bit-section-marker')).toHaveText('03')
+    const geometry = await header.evaluate(element => {
+      const marker = element.querySelector('.bit-section-marker')!
+      const label = element.querySelector('.bit-section-label')!
+      const badge = marker.getBoundingClientRect()
+      const title = label.getBoundingClientRect()
+      const range = document.createRange()
+      range.selectNodeContents(marker)
+      const text = range.getBoundingClientRect()
+      return {
+        textFits: text.top >= badge.top && text.bottom <= badge.bottom && text.left >= badge.left && text.right <= badge.right,
+        aligned: Math.abs((badge.top + badge.bottom - title.top - title.bottom) / 2) < 1,
+        separated: badge.right < title.left,
+      }
+    })
+    expect(geometry).toEqual({ textFits: true, aligned: true, separated: true })
+  }
+})
+
 test('formula, code and data components remain structured', async ({ page }) => {
   await page.goto('/10')
   await expect(page.locator('#slide-content .katex').first()).toBeVisible()

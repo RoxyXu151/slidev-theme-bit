@@ -29,7 +29,7 @@
 .bit-header .bit-logo { margin-left: auto; width: 210px; }
 .bit-section-marker { min-width: 55px; height: 76px; margin-left: -50px; display: flex; align-items: center; justify-content: center; padding-left: 16px; background: var(--bit-green); color: white; font-size: 24px; border-right: 5px solid var(--bit-accent); }
 .bit-section-label { color: #59665e; font-size: 19px; }
-.bit-header-minimal .bit-section-marker { height: 13px; min-width: 40px; padding: 0; }
+.bit-header-minimal .bit-section-marker { height: 32px; min-width: 44px; margin-left: 0; padding: 0 10px; flex-shrink: 0; font-size: 20px; line-height: 1; }
 .bit-header-minimal .bit-header { height: 76px; }
 .bit-header-building .bit-header { border-color: var(--bit-green); }
 .bit-header-building .bit-section-marker { background: var(--bit-accent); border: 0; }

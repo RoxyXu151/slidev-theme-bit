@@ -59,7 +59,7 @@ PDF 导出或测试前先运行 `npx playwright install chromium`。Linux 上可
 本主题从 GitHub 安装，**目前不要求或假定已发布到 npm**：
 
 ```bash
-npm install github:RoxyXu151/slidev-theme-bit#v0.1.0
+npm install github:RoxyXu151/slidev-theme-bit#v0.1.1
 ```
 
 在已有项目的第一页配置中添加：
