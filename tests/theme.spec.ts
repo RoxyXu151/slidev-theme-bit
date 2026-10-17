@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-// The showcase covers every shipped layout and cover/header variant.
+// The showcase covers every shipped layout and the demonstrated style variants.
 const slides = [
   ['bit-cover-classic', '北京理工大学'],
   ['bit-toc', '目录'],
@@ -17,7 +17,7 @@ const slides = [
   ['bit-image', '反向排列'],
   ['bit-header-building', '表格中的实验设置'],
   ['bit-default', '数据图表'],
-  ['bit-header-minimal', '研究计划与进度'],
+  ['bit-header-classic', '研究计划与进度'],
   ['bit-section', '写作与分享'],
   ['bit-default', 'Markdown 与 AI 协作'],
   ['bit-figure', '大图与图注'],
@@ -61,14 +61,24 @@ test('TOC links navigate to the intended section', async ({ page }) => {
   await expect(page).toHaveURL(/\/8$/)
 })
 
-test('minimal header keeps the section number inside its badge at different display sizes', async ({ page }) => {
+test('timeline header matches other body slides at different display sizes', async ({ page }) => {
   for (const viewport of [{ width: 1280, height: 720 }, { width: 800, height: 450 }]) {
     await page.setViewportSize(viewport)
+    await page.goto('/15')
+    const reference = page.locator('#slide-content .slidev-page-15 .bit-section-marker')
+    await expect(reference).toBeVisible()
+    const markerStyles = (element: Element) => {
+      const style = getComputedStyle(element)
+      return ['height', 'min-width', 'margin-left', 'padding-left', 'font-size', 'background-color', 'border-right'].map(property => style.getPropertyValue(property))
+    }
+    const expectedStyles = await reference.evaluate(markerStyles)
     await page.goto('/16')
     const header = page.locator('#slide-content .slidev-page-16 .bit-header')
     await expect(header).toBeVisible()
+    await expect(page.locator('#slide-content .slidev-page-16 .slidev-layout')).toHaveClass(/bit-header-classic/)
     await page.evaluate(() => document.fonts.ready)
     await expect(header.locator('.bit-section-marker')).toHaveText('03')
+    expect(await header.locator('.bit-section-marker').evaluate(markerStyles)).toEqual(expectedStyles)
     const geometry = await header.evaluate(element => {
       const marker = element.querySelector('.bit-section-marker')!
       const label = element.querySelector('.bit-section-label')!

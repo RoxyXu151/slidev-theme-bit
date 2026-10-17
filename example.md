@@ -232,7 +232,6 @@ sectionNumber: '03'
 ---
 section: 图文与数据
 sectionNumber: '03'
-headerStyle: minimal
 ---
 
 # 研究计划与进度
