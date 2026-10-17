@@ -1,6 +1,8 @@
 node_modules/
 dist/
 dist-starter/
+dist-attention/
+.slidev-check/
 .slidev/
 .work/
 test-results/

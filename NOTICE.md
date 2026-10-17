@@ -31,6 +31,10 @@
 
 如你是权利人并希望更正署名或移除素材，请通过本仓库 Issues 联系维护者。
 
+## 论文阅读示例中的独立素材
+
+`docs/attention/architecture.png` 来自 Vaswani et al. 的 *Attention Is All You Need*，arXiv:1706.03762v7 图 1，仅用于有署名的学术阅读示例。该图及原论文图表的权利不适用本项目的 MIT 许可。固定版本、许可依据与逐页来源见 [docs/attention/SOURCES.md](docs/attention/SOURCES.md)。
+
 ## 设计参数
 
 原模板第 2 页标注绿色 RGB(0,108,57)、褐红 RGB(161,63,61)、深灰 RGB(63,63,63)、浅灰 RGB(162,162,162)，字体为微软雅黑与 Century Gothic。主题保留前两种主色，并提供系统中文字体回退，不分发商业字体、不依赖在线字体服务。

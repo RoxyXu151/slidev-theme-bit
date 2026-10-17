@@ -44,6 +44,26 @@ test('initializer preserves all existing destination contents', async () => {
   assert.deepEqual(await readdir(existing), ['slides.md'])
 })
 
+test('each scenario includes its own content flow, notes and portable checker', async () => {
+  const cwd = await sandbox()
+  for (const [name, marker] of [['paper', '论文阅读'], ['meeting', '组会汇报'], ['defense', '论文答辩']]) {
+    const destination = path.join(cwd, name)
+    const result = run(init, [destination, '--template', name, '--theme', root], cwd)
+    assert.equal(result.status, 0, result.stderr)
+    const source = await readFile(path.join(destination, 'slides.md'), 'utf8')
+    assert.ok(source.includes(marker))
+    assert.match(source, /<!--/)
+    const manifest = JSON.parse(await readFile(path.join(destination, 'package.json'), 'utf8'))
+    assert.equal(manifest.scripts.check, 'node scripts/check_deck.mjs')
+    assert.ok(manifest.devDependencies['@slidev/parser'])
+    assert.equal(existsSync(path.join(destination, 'scripts/lib/checks.mjs')), true)
+    assert.match(await readFile(path.join(destination, 'AGENTS.md'), 'utf8'), /report\.json/)
+  }
+  const invalid = path.join(cwd, 'invalid scenario')
+  assert.notEqual(run(init, [invalid, '--template', 'unknown'], cwd).status, 0)
+  assert.equal(existsSync(invalid), false)
+})
+
 test('initializer rejects an unrelated local theme before creating output', async () => {
   const cwd = await sandbox()
   const invalid = path.join(cwd, 'other theme')

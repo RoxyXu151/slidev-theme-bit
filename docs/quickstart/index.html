@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>开始制作 · 北理工 Slidev</title>
+  <style>
+    :root{--green:#006c39;--accent:#a13f3d;--ink:#303b35;--muted:#627369;--line:#dce6df}*{box-sizing:border-box}body{margin:0;background:#f6f8f6;color:var(--ink);font:18px/1.75 "Microsoft YaHei","PingFang SC",system-ui,sans-serif}header,main,footer{max-width:1080px;margin:auto;padding:28px}header{display:flex;align-items:center;justify-content:space-between;gap:24px}header img{width:250px;height:auto}a{color:var(--green);text-underline-offset:4px}nav{display:flex;gap:20px;font-size:16px}h1{font-size:44px;line-height:1.35;margin:18px 0}h2{font-size:28px;margin:0 0 16px}h3{font-size:21px;margin:0 0 10px;color:var(--green)}p{margin:12px 0}.intro{padding:24px 0 38px;max-width:850px}.kicker{color:var(--green);letter-spacing:2px}.lead{font-size:22px;color:var(--muted)}.steps{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:26px 0}.steps li{padding:8px 14px;border-bottom:2px solid var(--green)}section{background:white;border:1px solid var(--line);padding:30px;margin:0 0 24px;scroll-margin-top:20px}.number{color:var(--accent);font-weight:400;margin-right:14px}.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}.choice{background:white;text-align:left;padding:20px;border:1px solid var(--line);cursor:pointer;font:inherit;color:inherit}.choice[aria-pressed="true"]{border:2px solid var(--green);padding:19px;background:#f0f6f2}.choice strong{display:block;color:var(--green);font-size:22px}.choice span{font-size:16px;color:var(--muted)}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f0f5f1;padding:20px;border-left:4px solid var(--green);font:16px/1.8 Consolas,monospace}button.copy,.primary{display:inline-block;border:0;background:var(--green);color:white;padding:10px 20px;font:inherit;cursor:pointer;text-decoration:none}.secondary{display:inline-block;margin:10px 0 10px 20px}.note{font-size:16px;color:var(--muted)}.formats{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin:22px 0}.formats p{font-size:16px}.formats strong{color:var(--green)}video{width:100%;background:#e5ece7;margin-top:12px}.prompt{font-family:inherit;font-size:17px}.status{font-size:15px;color:var(--green);margin-left:12px}footer{font-size:14px;color:var(--muted);padding-bottom:50px}@media(max-width:700px){header{align-items:flex-start;flex-direction:column}nav{flex-wrap:wrap}.choices,.formats{grid-template-columns:1fr}h1{font-size:34px}main,header,footer{padding:20px}section{padding:22px}.secondary{margin-left:0;display:block}}
+  </style>
+</head>
+<body>
+<header><img src="bit-logo.png" alt="北京理工大学"><nav><a href="../">主题演示</a><a href="../attention/1">完整论文示例</a><a href="https://github.com/RoxyXu151/slidev-theme-bit">GitHub</a></nav></header>
+<main>
+  <div class="intro"><div class="kicker">非官方社区主题 · 开始使用</div><h1>用 AI 和 Markdown<br>制作北理工风格的幻灯片</h1><p class="lead">选一个场景，提供真实材料，预览后用自然语言修改。</p><ol class="steps"><li>1 选起步稿</li><li>2 提供材料</li><li>3 预览与修改</li><li>4 检查</li><li>5 展示与导出</li></ol><a class="primary" href="../attention/1">先看 Attention Is All You Need 示例</a></div>
+
+  <section id="choose"><h2><span class="number">01</span>选一份合适的起步稿</h2><p>起步稿保留待补充标记和讲稿提示，帮助你组织内容；完整论文示例展示填入真实材料后的效果。</p><div class="choices" role="group" aria-label="选择汇报场景"><button class="choice" data-template="paper" aria-pressed="true"><strong>论文阅读</strong><span>12 页 · 问题、方法、实验、批判性讨论</span></button><button class="choice" data-template="meeting" aria-pressed="false"><strong>组会汇报</strong><span>8 页 · 进展、证据、阻碍、下一步</span></button><button class="choice" data-template="defense" aria-pressed="false"><strong>毕业答辩</strong><span>9 页 · 背景、方法、实验、结论</span></button></div><p>本地使用需要 Node.js 22.18 以上。先下载仓库并安装依赖：</p><pre>git clone https://github.com/RoxyXu151/slidev-theme-bit.git
+cd slidev-theme-bit
+npm ci</pre><p>再创建独立报告目录，主题仓库仍保留作为参考：</p><pre id="create-command">npm run create:deck -- ../my-paper --template paper --theme .
+cd ../my-paper
+npm install
+npm run dev</pre><button class="copy" data-copy="create-command">复制创建命令</button><span class="status" aria-live="polite"></span><p><a href="https://stackblitz.com/github/RoxyXu151/slidev-theme-bit?file=attention.md&amp;startScript=dev:paper">也可在浏览器编辑完整示例</a></p><p class="note">浏览器入口使用 StackBlitz；首次会安装依赖，需要其支持的桌面浏览器和网络。组会、答辩的起步稿不会带入示例论文的实验结果。</p></section>
+
+  <section id="ai"><h2><span class="number">02</span>把材料和源稿一起交给 AI</h2><p>提供论文、真实结果和所选起步稿 <code>slides.md</code>。有 AI 编程助手时，在主题仓库中调用 <code>$bit-slidev</code>；也可参考仓库的 <a href="https://github.com/RoxyXu151/slidev-theme-bit/blob/main/docs/AI_PROMPT.md">完整写作提示词</a>。</p><pre id="ai-prompt" class="prompt">请基于我提供的论文，用北理工主题制作论文阅读汇报。
+听众：本方向研究生；时长：12 分钟；总页数：12 页。
+先给出每页要回答的问题，再填写所选起步稿 slides.md。
+保留来源和讲稿，区分论文结论与自己的分析。
+缺失材料写 [待补充]，不要编造数据或文献。
+复用现有版式，保存后运行报告检查，根据截图修正再交付。</pre><button class="copy" data-copy="ai-prompt">复制任务描述</button><span class="status" aria-live="polite"></span><p class="note">本项目提供主题与写作流程，不内置在线 AI 服务，也不会自动替你验证论文事实。</p></section>
+
+  <section id="edit"><h2><span class="number">03</span>预览、修改，再看一次</h2><p>打开启动命令给出的本地地址。修改 <code>slides.md</code> 并保存，网页会更新；方向键翻页，<code>P</code> 查看讲稿，<code>O</code> 查看总览。</p><pre class="prompt">请把第 6 页拆成两页：第一页解释公式，第二页给出例子。
+请放大第 5 页的架构图，保留比例和图片出处。
+请精简第 10 页，只保留最有证据支持的结论。</pre><div class="formats"><div><strong>slides.md</strong><p>可编辑源稿。标题、正文、公式、数据和讲稿在这里。</p></div><div><strong>网页演示</strong><p>浏览器播放的版本，支持交互和演讲者视图。</p></div><div><strong>PDF / PPTX</strong><p>额外导出物。源稿修改后，需要重新导出。</p></div></div></section>
+
+  <section id="check"><h2><span class="number">04</span>让检查器先找排版问题</h2><pre>npx playwright install chromium
+npm run check</pre><p>检查器会启动临时预览，逐页截图，结束后关闭。打开 <code>.slidev-check/slides/index.html</code> 看问题和截图；AI 可读取同目录下的 <code>report.json</code>，修改后重新检查。</p><p>检查包括：正文越界、页脚重叠、缺失图片、长标题、内容块相交和目录错页。提醒需要结合截图确认；检查通过仍需核对引用、数字与结论。</p><p class="note">已安装 Chrome 时可用 <code>npm run check -- --browser chrome</code>。检查器检查浏览器默认显示状态，不检查全部动画步骤或 PowerPoint 导出。</p></section>
+
+  <section id="export"><h2><span class="number">05</span>展示，或导出分享</h2><pre>npm run build
+npm run export</pre><p>网页产物在 <code>dist/</code>，PDF 为 <code>slides.pdf</code>。如需 PPTX，可选择保留外观的图片版，或可继续编辑的对象版：</p><pre>npx slidev export slides.md --format pptx --output slides.pptx
+npx slidev export slides.md --format pptx-editable --output slides-editable.pptx --no-with-clicks</pre><p class="note">图片版文字无法单独编辑；可编辑版可能出现换行、图片或效果差异，交付前请在 PowerPoint 中打开核对。<a href="https://sli.dev/guide/exporting.html">Slidev 导出说明</a></p></section>
+
+  <section id="video"><h2>两分钟操作演示</h2><p>演示选起步稿、查看完整示例、修改源稿、检查和打开导出入口。字幕讲解，无旁白；AI 生成内容需在你选用的 AI 工具中完成。</p><video controls preload="metadata" poster="poster.jpg" aria-label="北理工 Slidev 两分钟操作演示"><source src="walkthrough.webm" type="video/webm"><a href="walkthrough.webm">下载操作演示</a></video><p class="note"><a href="transcript.md">视频文字步骤</a></p></section>
+</main>
+<footer>非官方社区项目 · 原 PPT 模板设计：韩宇（2019）。<a href="https://github.com/RoxyXu151/slidev-theme-bit/blob/main/NOTICE.md">标识和素材权利说明</a> · 论文图表来源见 <a href="https://github.com/RoxyXu151/slidev-theme-bit/blob/main/docs/attention/SOURCES.md">示例来源</a>。</footer>
+<script>
+  document.querySelectorAll('[data-template]').forEach(button => button.addEventListener('click', () => {
+    document.querySelectorAll('[data-template]').forEach(el => el.setAttribute('aria-pressed', String(el === button)));
+    const name = button.dataset.template;
+    document.getElementById('create-command').textContent = `npm run create:deck -- ../my-${name} --template ${name} --theme .\ncd ../my-${name}\nnpm install\nnpm run dev`;
+  }));
+  document.querySelectorAll('[data-copy]').forEach(button => button.addEventListener('click', async () => {
+    const content = document.getElementById(button.dataset.copy).textContent;
+    try { await navigator.clipboard.writeText(content); button.nextElementSibling.textContent = '已复制'; }
+    catch { button.nextElementSibling.textContent = '请选中上方文字手动复制'; }
+  }));
+</script>
+</body></html>

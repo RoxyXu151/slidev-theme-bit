@@ -6,13 +6,31 @@
 
 Bring the familiar BIT PowerPoint style to the browser. Use Markdown, Vue, and AI assistance to prepare course presentations, research group reports, and thesis defenses.
 
-[Live demo](https://roxyxu151.github.io/slidev-theme-bit/) · [Edit in your browser](https://stackblitz.com/github/RoxyXu151/slidev-theme-bit?file=slides.md&startScript=dev:starter) · [Use this template](https://github.com/new?template_name=slidev-theme-bit&template_owner=RoxyXu151) · [AI writing prompt (Chinese)](docs/AI_PROMPT.md)
+[Start here](https://roxyxu151.github.io/slidev-theme-bit/guide/) · [Complete paper example](https://roxyxu151.github.io/slidev-theme-bit/attention/1) · [All layouts](https://roxyxu151.github.io/slidev-theme-bit/) · [Edit in your browser](https://stackblitz.com/github/RoxyXu151/slidev-theme-bit?file=attention.md&startScript=dev:paper) · [Use this template](https://github.com/new?template_name=slidev-theme-bit&template_owner=RoxyXu151)
 
 ![Classic cover](docs/preview/cover.png)
 
 > An unofficial community project adapted from the BIT academic defense PowerPoint template designed by Han Yu (韩宇) in 2019. Original code and documentation are licensed under MIT. Artwork from the original template and university marks retain their original rights. See [NOTICE.md](NOTICE.md).
 
-## Quick start
+## First time here?
+
+**Choose a starter → Give verified material to AI → Preview and revise → Check each slide → Present or export.**
+
+Slidev uses Markdown source and presents in a browser. `slides.md` is editable source; PDF and PPTX are additional exports that must be regenerated after edits. This project provides a theme, starters, and an AI skill, not a hosted AI generation service.
+
+The [beginner guide](docs/GETTING_STARTED.en.md) explains files, editing, checks, exports, and troubleshooting. The [visual guide and two-minute walkthrough](https://roxyxu151.github.io/slidev-theme-bit/guide/) use Chinese captions.
+
+| Starter | Slides | Content flow |
+| --- | ---: | --- |
+| `paper` · Paper reading | 12 | Problem, methods, experiments, discussion, sources |
+| `meeting` · Research group | 8 | Progress, evidence, blockers, next steps |
+| `defense` · Thesis defense | 9 | Background, methods, experiments, conclusions |
+
+The complete **Attention Is All You Need** example has 14 slides with equations, the original architecture figure, reported data, notes, and discussion. [Source deck](attention.md) · [Pinned version and sources](docs/attention/SOURCES.md)
+
+![Attention Is All You Need example](docs/attention/preview.jpg)
+
+## Start locally
 
 Requires Node.js **22.18 or later** (Node.js 22 LTS recommended) and npm.
 
@@ -20,12 +38,21 @@ Requires Node.js **22.18 or later** (Node.js 22 LTS recommended) and npm.
 git clone https://github.com/RoxyXu151/slidev-theme-bit.git
 cd slidev-theme-bit
 npm ci
-npm run dev:starter
+npm run dev:paper
 ```
 
-Open the local URL printed in your terminal and edit **`slides.md`** to preview changes live. This nine-slide thesis defense starter includes a cover, contents, methods, experiments, and acknowledgments. Research content is marked with placeholders.
+Open the printed URL and edit **`attention.md`** to preview the worked example. To start your own presentation, run this in the theme repository:
 
-Run `npm run dev` to open the full theme showcase in **`example.md`**. You can edit either file. The browser editor uses StackBlitz and requires a supported desktop browser and network access. It installs dependencies on first launch. You can also select “Use this template” to create your own repository and edit it in Codespaces.
+```bash
+npm run create:deck -- ../my-paper --template paper --theme .
+cd ../my-paper
+npm install
+npm run dev
+```
+
+Replace `paper` with `meeting` or `defense` (default). Starters contain placeholders and speaker-note prompts. The initializer refuses nonempty destinations and installs nothing. Edit **`slides.md`** in the new project; saving updates the browser.
+
+`npm run dev:starter` still opens the nine-slide root defense starter **`slides.md`**. `npm run dev` opens the layout showcase **`example.md`**. The StackBlitz browser entry installs dependencies on first launch and needs a supported desktop browser and network. Local checks and exports are more complete. You can also select “Use this template” to create your own repository.
 
 The starter, showcase, AI prompt, and some built-in labels are in Simplified Chinese. This English README documents the same theme and interfaces.
 
@@ -45,24 +72,33 @@ The starter, showcase, AI prompt, and some built-in labels are in Simplified Chi
 | Command | Purpose |
 | --- | --- |
 | `npm run dev:starter` | Edit the thesis defense starter, `slides.md` |
+| `npm run dev:paper` | Edit the complete example, `attention.md` |
+| `npm run create:deck -- --list` | List three scenario starters |
+| `npm run check -- slides.md` | Check a report; output diagnostics, JSON, and screenshots |
+| `npm run check:paper` | Strictly check the worked example |
 | `npm run dev` | View the complete theme showcase, `example.md` |
 | `npm run build:starter` | Build the starter website into `dist-starter/` |
 | `npm run build` | Build the theme demo into `dist/` |
+| `npm run build:paper` | Build the paper example into `dist-attention/` |
+| `npm run build:site` | Build the showcase, paper example, and beginner guide |
 | `npm run export` | Export the starter to `slides.pdf` |
 | `npm run export:example` | Export the showcase to `example.pdf` |
 | `npm test` | Check browser rendering, asset loading, and content boundaries |
 | `npm run test:skill` | Check skill initialization, installation, and preservation of existing files |
+| `npm run test:checker` | Verify detection of real rendering faults |
 
 Before exporting PDFs or running tests, run `npx playwright install chromium`. On Linux, use `npx playwright install --with-deps chromium` to install system dependencies as well. Run PDF exports locally. In a browser editing environment, you can build the website and then use the browser's print function.
 
 Use the arrow keys to navigate, `P` for presenter view, `O` for the overview, and `F` for full screen. Write speaker notes in HTML comments at the end of each slide.
+
+The checker starts and closes an independent preview without changing source files. Open `.slidev-check/<entry-name>/index.html`; the same directory contains `report.json` and screenshots. Add `--browser chrome` to use installed Chrome. Checks cover overflow, footer intrusion, missing images, long titles, intersecting content blocks, and TOC targets. Review warnings manually; `--strict` treats them as failures. Research facts, all animation steps, and PPTX rendering require separate review. [Scope and exit codes](docs/GETTING_STARTED.en.md#4-check-the-actual-report)
 
 ## Use in an existing Slidev project
 
 Install the theme from GitHub. **These instructions do not require or assume publication to npm.**
 
 ```bash
-npm install github:RoxyXu151/slidev-theme-bit#v0.1.1
+npm install github:RoxyXu151/slidev-theme-bit#v0.2.0
 ```
 
 Add the following configuration to the first slide of your project:
@@ -183,7 +219,7 @@ See [AGENTS.md](AGENTS.md) for repository maintenance and AI editing guidance. K
 
 ## Agent Skill
 
-The repository includes the [bit-slidev skill](.agents/skills/bit-slidev/SKILL.md), with layout interfaces, a nine-slide starter, project initialization, and preview checks. Codex discovers repository skills under `.agents/skills/`; see the [official skill documentation](https://learn.chatgpt.com/docs/build-skills) for directory conventions.
+The repository includes the [bit-slidev skill](.agents/skills/bit-slidev/SKILL.md), with layout interfaces, three scenario starters, project initialization, and a generate–check–revise workflow. Codex discovers repository skills under `.agents/skills/`; see the [official skill documentation](https://learn.chatgpt.com/docs/build-skills) for directory conventions.
 
 Invoke it in this repository:
 
@@ -202,8 +238,8 @@ The installer copies the complete skill to `~/.agents/skills/bit-slidev` and ref
 Agents can also initialize a project directly. The script does not access the network or install dependencies and refuses nonempty destinations:
 
 ```bash
-node .agents/skills/bit-slidev/scripts/init_deck.mjs ./my-defense
-cd my-defense
+node .agents/skills/bit-slidev/scripts/init_deck.mjs ./my-paper --template paper
+cd my-paper
 npm install
 npm run dev
 ```
@@ -218,13 +254,13 @@ Build `slides.md`:
 npx slidev build slides.md --out dist-starter --base /your-repository-name/
 ```
 
-Deploy `dist-starter/` to a static hosting service. The included [Pages workflow](.github/workflows/pages.yml) publishes the theme showcase in **`example.md`** by default. To publish your own report, change `npm run build` to `npm run build:starter` in that workflow and change the upload path to `dist-starter`. In your repository's Settings → Pages, select GitHub Actions as the source.
+Deploy `dist-starter/` to a static hosting service. The included [Pages workflow](.github/workflows/pages.yml) runs `npm run build:site` to publish the showcase, paper example, and guide. To publish only your report, replace that build step with the command above and upload `dist-starter`. In Settings → Pages, select GitHub Actions as the source.
 
 The theme has no built-in remote AI service and requires no API key. Before publishing a report in a public repository or on Pages, confirm that its materials are suitable for public access.
 
 ## Contributing
 
-Contributions that improve layouts, examples, or documentation for BIT teaching and research are welcome. After making changes, run `npm ci`, `npm run build`, `npm run build:starter`, and `npm test`, and check Chinese text readability when projected. See [CONTRIBUTING.md (Chinese)](CONTRIBUTING.md) for details.
+Contributions that improve layouts, examples, or documentation for BIT teaching and research are welcome. Run `npm ci`, `npm run build:site`, `npm run build:starter`, and `npm test`, and check Chinese text readability when projected. See [CONTRIBUTING.md (Chinese)](CONTRIBUTING.md) for skill and checker verification.
 
 ## Acknowledgments
 

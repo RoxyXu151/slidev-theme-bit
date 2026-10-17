@@ -17,6 +17,8 @@ description: Create and edit Beijing Institute of Technology (北京理工大学
 node "<skill-dir>/scripts/init_deck.mjs" "<project-dir>"
 ```
 
+按用途选择 `--template paper`（论文阅读，12 页）、`--template meeting`（组会，8 页）或 `--template defense`（答辩，9 页，默认）。用 `--list` 列出场景；起步稿包含各自的内容结构与讲稿提示，不能将占位内容当成真实结果。完整论文阅读示例在主题仓库 `attention.md`，固定材料与数据口径见 `docs/attention/SOURCES.md`。
+
 脚本只创建文件，不安装依赖或联网，目标目录非空时会拒绝写入。默认依赖已发布的 GitHub 主题安装包。已持有主题源码时，可加 `--theme "<theme-repo-dir>"` 复用本地主题。进入生成目录后执行 `npm install`，随后 `npm run dev`。
 
 已有项目需要安装主题时，使用 `slidev-theme-bit` 的 GitHub 发布包或用户指定的版本，不要假定 npm 上的同名包就是本项目。初始化脚本中的依赖地址是可用的固定版本。
@@ -40,6 +42,9 @@ node "<skill-dir>/scripts/init_deck.mjs" "<project-dir>"
 
 ## 验证与交付
 
+- 使用生成项目的 `npm run check` 检查实际报告。主题仓库可用 `npm run check -- <源稿路径>`；需要时加 `--browser chrome`。检查器自动启动并关闭独立预览，输出 `.slidev-check/<源稿名>/index.html`、`report.json` 和逐页 PNG，不修改源稿。
+- 阅读 JSON 的页码与规则，检查截图，修改对应源稿，再运行检查；完成标准是没有未处理的错误，所有提醒已经修正或给出具体人工核查结论。不要通过移除检查、隐藏正文或缩小字体让报告通过。检查范围和退出码见 `references/checking.md`。
+- 自动规则不验证论文事实、所有点击动画或 PPTX 导出。人工继续核对来源、数据、语义与投影可读性，不能把规则通过写成内容已获验证。
 - 在演示项目中执行 `npm run build`，并在浏览器逐页检查中文换行、图像加载、文字边界和目录跳转。特别检查封面长标题、双栏与页眉编号。在主题源码仓库中，起步稿的构建命令是 `npm run build:starter`。
 - 需要 PDF 时，先安装导出依赖 `npm install -D playwright-chromium`，再执行 `npx playwright install chromium` 和 `npm run export`。Linux 缺少系统依赖时使用 `npx playwright install --with-deps chromium`。导出后检查页数和实际页面，不把构建成功等同于排版正确。
 - 若环境不能预览或导出，保留完整源文件，明确未完成的验证及具体原因，不声称已检查。

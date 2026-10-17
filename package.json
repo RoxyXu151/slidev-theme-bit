@@ -1,30 +1,70 @@
 {
   "name": "slidev-theme-bit",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "北京理工大学 Slidev 学术答辩主题 · Beijing Institute of Technology",
   "type": "module",
   "license": "MIT",
   "author": "Wenbin Xu",
-  "repository": { "type": "git", "url": "https://github.com/RoxyXu151/slidev-theme-bit.git" },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RoxyXu151/slidev-theme-bit.git"
+  },
   "homepage": "https://roxyxu151.github.io/slidev-theme-bit/",
   "bugs": "https://github.com/RoxyXu151/slidev-theme-bit/issues",
-  "keywords": ["slidev", "slidev-theme", "bit", "beijing-institute-of-technology", "北京理工大学", "thesis", "academic"],
-  "files": ["assets", "components", "composables", "layouts", "styles", "docs", ".agents/skills/bit-slidev", "example.md", "slides.md", "README.md", "README.en.md", "LICENSE", "NOTICE.md", "AGENTS.md", "CONTRIBUTING.md"],
-  "engines": { "node": ">=22.18.0", "slidev": ">=53.0.0" },
+  "keywords": [
+    "slidev",
+    "slidev-theme",
+    "bit",
+    "beijing-institute-of-technology",
+    "北京理工大学",
+    "thesis",
+    "academic"
+  ],
+  "files": [
+    "assets",
+    "components",
+    "composables",
+    "layouts",
+    "styles",
+    "docs",
+    ".agents/skills/bit-slidev",
+    "example.md",
+    "attention.md",
+    "slides.md",
+    "README.md",
+    "README.en.md",
+    "LICENSE",
+    "NOTICE.md",
+    "AGENTS.md",
+    "CONTRIBUTING.md",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=22.18.0",
+    "slidev": ">=53.0.0"
+  },
   "scripts": {
     "dev": "slidev example.md",
     "dev:starter": "slidev slides.md",
+    "dev:paper": "slidev attention.md",
+    "create:deck": "node .agents/skills/bit-slidev/scripts/init_deck.mjs",
+    "check": "node .agents/skills/bit-slidev/scripts/check_deck.mjs",
+    "check:paper": "node .agents/skills/bit-slidev/scripts/check_deck.mjs attention.md --strict",
+    "build:paper": "slidev build attention.md --out dist-attention",
+    "build:site": "node scripts/build_site.mjs",
     "build": "slidev build example.md",
     "build:starter": "slidev build slides.md --out dist-starter",
     "export": "slidev export slides.md --output slides.pdf",
     "export:example": "slidev export example.md --output example.pdf",
     "test": "playwright test",
     "test:skill": "node --test tests/skill.test.mjs",
+    "test:checker": "node --test tests/checker.test.mjs",
     "test:update": "playwright test --update-snapshots"
   },
   "devDependencies": {
     "@playwright/test": "^1.61.1",
     "@slidev/cli": "53.0.0",
+    "@slidev/parser": "53.0.0",
     "@slidev/theme-default": "^0.25.0",
     "playwright-chromium": "^1.61.1",
     "vue": "^3.5.42"
@@ -39,8 +79,26 @@
       "aspectRatio": "16/9",
       "canvasWidth": 1280,
       "transition": "fade",
-      "fonts": { "sans": "Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif", "serif": "Noto Serif CJK SC, serif", "mono": "Consolas, monospace", "local": ["Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", "Noto Serif CJK SC", "Consolas"] },
-      "themeConfig": { "footer": "北京理工大学", "motto": "德以明理　学以精工", "showPageNumber": true, "headerStyle": "classic" }
+      "favicon": "",
+      "fonts": {
+        "provider": "none",
+        "sans": "Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif",
+        "serif": "Noto Serif CJK SC, serif",
+        "mono": "Consolas, monospace",
+        "local": [
+          "Microsoft YaHei",
+          "PingFang SC",
+          "Noto Sans CJK SC",
+          "Noto Serif CJK SC",
+          "Consolas"
+        ]
+      },
+      "themeConfig": {
+        "footer": "北京理工大学",
+        "motto": "德以明理　学以精工",
+        "showPageNumber": true,
+        "headerStyle": "classic"
+      }
     }
   }
 }

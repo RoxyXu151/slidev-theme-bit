@@ -6,13 +6,31 @@
 
 把熟悉的北理工 PPT 风格带到浏览器，用 Markdown、Vue 与 AI 辅助完成课程展示、组会汇报和论文答辩。
 
-[在线演示](https://roxyxu151.github.io/slidev-theme-bit/) · [浏览器中编辑](https://stackblitz.com/github/RoxyXu151/slidev-theme-bit?file=slides.md&startScript=dev:starter) · [使用此模板](https://github.com/new?template_name=slidev-theme-bit&template_owner=RoxyXu151) · [AI 写作提示词](docs/AI_PROMPT.md)
+[开始制作](https://roxyxu151.github.io/slidev-theme-bit/guide/) · [完整论文示例](https://roxyxu151.github.io/slidev-theme-bit/attention/1) · [全部版式](https://roxyxu151.github.io/slidev-theme-bit/) · [浏览器中编辑](https://stackblitz.com/github/RoxyXu151/slidev-theme-bit?file=attention.md&startScript=dev:paper) · [使用此模板](https://github.com/new?template_name=slidev-theme-bit&template_owner=RoxyXu151)
 
 ![经典封面](docs/preview/cover.png)
 
 > 非官方社区项目。根据韩宇于 2019 年制作的北理工学术答辩 PPT 模板改编。代码与文档采用 MIT 许可，原模板素材和学校标识保留原有权利，详见 [NOTICE.md](NOTICE.md)。
 
-## 三分钟开始
+## 第一次使用
+
+**选起步稿 → 提供真实材料给 AI → 预览与修改 → 逐页检查 → 展示或导出。**
+
+Slidev 用 Markdown 编写，在浏览器中展示。`slides.md` 是可编辑源稿，网页是演示界面；PDF 和 PPTX 是需要重新生成的导出物。本项目提供主题、起步稿和 AI 技能，不内置在线 AI 服务。
+
+[新手指南](docs/GETTING_STARTED.md) 包含完整操作、文件区别、修改示例与常见问题。[图文入口与两分钟录屏](https://roxyxu151.github.io/slidev-theme-bit/guide/) 可先看实际流程。
+
+| 起步稿 | 页数 | 内容安排 |
+| --- | ---: | --- |
+| `paper` · 论文阅读 | 12 | 研究问题、方法、实验、讨论、参考资料 |
+| `meeting` · 组会汇报 | 8 | 本周进展、真实证据、阻碍、下周计划 |
+| `defense` · 毕业答辩 | 9 | 背景、方法、实验、总结与致谢 |
+
+完整填充示例选用 **《Attention Is All You Need》**：14 页，含公式、原论文图、真实结果、讲稿和局限分析。[源稿](attention.md) · [固定版本与数据来源](docs/attention/SOURCES.md)
+
+![Attention Is All You Need 论文阅读示例](docs/attention/preview.jpg)
+
+## 本地开始
 
 需要 Node.js **22.18 或以上**（建议 Node.js 22 LTS）和 npm。
 
@@ -20,12 +38,21 @@
 git clone https://github.com/RoxyXu151/slidev-theme-bit.git
 cd slidev-theme-bit
 npm ci
-npm run dev:starter
+npm run dev:paper
 ```
 
-打开终端给出的本地地址，编辑 **`slides.md`** 即可实时预览。它是一份含封面、目录、方法、实验与致谢的 9 页答辩起步稿，研究内容均使用待补充标记。
+打开终端给出的本地地址，编辑 **`attention.md`** 即可实时预览完整论文示例。想开始自己的报告，在主题仓库中选择场景并创建独立目录：
 
-`npm run dev` 打开 **`example.md`** 的完整主题展示。两份文件都可以自由修改。浏览器编辑入口使用 StackBlitz，需要其支持的桌面浏览器及网络环境，首次启动会安装依赖。也可以点击“使用此模板”创建自己的仓库，再通过 Codespaces 编辑。
+```bash
+npm run create:deck -- ../my-paper --template paper --theme .
+cd ../my-paper
+npm install
+npm run dev
+```
+
+将 `paper` 换成 `meeting` 或 `defense` 选择其他场景。每份起步稿含待补充标记和讲稿提示；默认 `defense`。初始化器不覆盖非空目录，也不自动安装依赖。编辑新目录的 **`slides.md`**，保存后网页更新。
+
+`npm run dev:starter` 仍打开根目录的 9 页答辩起步稿 **`slides.md`**；`npm run dev` 打开 **`example.md`** 的主题展示。浏览器入口使用 StackBlitz，首次安装依赖，需要受支持的桌面浏览器和网络；本地检查与导出更完整。也可“使用此模板”创建自己的仓库。
 
 ## 预览
 
@@ -43,24 +70,33 @@ npm run dev:starter
 | 命令 | 作用 |
 | --- | --- |
 | `npm run dev:starter` | 编辑答辩起步稿 `slides.md` |
+| `npm run dev:paper` | 编辑完整论文阅读示例 `attention.md` |
+| `npm run create:deck -- --list` | 列出三类起步稿 |
+| `npm run check -- slides.md` | 检查报告，输出中文报告、JSON 与截图 |
+| `npm run check:paper` | 严格检查完整论文示例 |
 | `npm run dev` | 查看全部主题示例 `example.md` |
 | `npm run build:starter` | 构建答辩网页至 `dist-starter/` |
 | `npm run build` | 构建主题演示至 `dist/` |
+| `npm run build:paper` | 构建论文示例至 `dist-attention/` |
+| `npm run build:site` | 构建主题、论文示例与新手指南 |
 | `npm run export` | 将答辩起步稿导出为 `slides.pdf` |
 | `npm run export:example` | 将演示导出为 `example.pdf` |
 | `npm test` | 检查浏览器渲染、素材加载和内容边界 |
 | `npm run test:skill` | 检查技能初始化、安装和已有文件保护 |
+| `npm run test:checker` | 验证检查器能发现真实排版故障 |
 
 PDF 导出或测试前先运行 `npx playwright install chromium`。Linux 上可运行 `npx playwright install --with-deps chromium` 安装系统依赖。导出需要在本机运行，浏览器编辑环境可先构建网页，再使用浏览器打印功能。
 
 方向键翻页，`P` 打开演讲者视图，`O` 打开总览，`F` 全屏。演讲者备注写在每页末尾的 HTML 注释中。
+
+检查器默认自动启动并关闭独立预览，不修改源稿。结果位于 `.slidev-check/<源稿文件名>/index.html`，同目录包含 `report.json` 和截图；已有 Chrome 可加 `--browser chrome`。它检查越界、页脚重叠、缺图、长标题、内容块相交和目录目标。提醒需人工确认，`--strict` 将提醒也作为失败。研究事实、全部动画步骤和 PPTX 排版需另外核查。[详细范围与退出码](docs/GETTING_STARTED.md#4-检查报告)
 
 ## 在已有 Slidev 项目中使用
 
 本主题从 GitHub 安装，**目前不要求或假定已发布到 npm**：
 
 ```bash
-npm install github:RoxyXu151/slidev-theme-bit#v0.1.1
+npm install github:RoxyXu151/slidev-theme-bit#v0.2.0
 ```
 
 在已有项目的第一页配置中添加：
@@ -181,7 +217,7 @@ fit: contain
 
 ## Agent Skill
 
-仓库附带 [bit-slidev 技能](.agents/skills/bit-slidev/SKILL.md)，包含版式接口、9 页起步稿、项目初始化和预览检查流程。Codex 支持从仓库的 `.agents/skills/` 发现技能；目录约定见 [官方技能文档](https://learn.chatgpt.com/docs/build-skills)。
+仓库附带 [bit-slidev 技能](.agents/skills/bit-slidev/SKILL.md)，包含版式接口、三类起步稿、项目初始化和“生成—检查—修正”流程。Codex 支持从仓库的 `.agents/skills/` 发现技能；目录约定见 [官方技能文档](https://learn.chatgpt.com/docs/build-skills)。
 
 在本仓库中可以直接调用：
 
@@ -200,8 +236,8 @@ node .agents/skills/bit-slidev/scripts/install_skill.mjs
 Agent 也可以直接初始化项目（脚本不联网、不安装依赖，拒绝写入非空目录）：
 
 ```bash
-node .agents/skills/bit-slidev/scripts/init_deck.mjs ./my-defense
-cd my-defense
+node .agents/skills/bit-slidev/scripts/init_deck.mjs ./my-paper --template paper
+cd my-paper
 npm install
 npm run dev
 ```
@@ -216,13 +252,13 @@ npm run dev
 npx slidev build slides.md --out dist-starter --base /你的仓库名/
 ```
 
-将 `dist-starter/` 部署到静态托管服务。仓库内的 [Pages 工作流](.github/workflows/pages.yml) 默认发布 **`example.md`** 的主题展示；发布自己的报告时，将其中的 `npm run build` 改为 `npm run build:starter`，上传路径改为 `dist-starter`。在仓库 Settings → Pages 中选择 GitHub Actions 作为来源。
+将 `dist-starter/` 部署到静态托管服务。仓库内的 [Pages 工作流](.github/workflows/pages.yml) 默认运行 `npm run build:site`，发布主题展示、论文示例和指南。只发布自己的报告时，将构建步骤替换为上面的构建命令，上传路径改为 `dist-starter`。在 Settings → Pages 中选择 GitHub Actions 作为来源。
 
 本主题没有内置远程 AI 服务，不需要 API 密钥。将报告发布到公开仓库或 Pages 前，请自行确认材料适合公开。
 
 ## 贡献
 
-欢迎提交适合北理工教学和科研场景的版式改进、使用示例与文档修正。修改后运行 `npm ci`、`npm run build`、`npm run build:starter` 与 `npm test`，并检查投影下的中文可读性。详细说明见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+欢迎提交适合北理工教学和科研场景的版式改进、使用示例与文档修正。修改后运行 `npm ci`、`npm run build:site`、`npm run build:starter` 与 `npm test`，并检查投影下的中文可读性。技能和检查器的验证步骤见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 ## 致谢
 
