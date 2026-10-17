@@ -51,6 +51,7 @@ The starter, showcase, AI prompt, and some built-in labels are in Simplified Chi
 | `npm run export` | Export the starter to `slides.pdf` |
 | `npm run export:example` | Export the showcase to `example.pdf` |
 | `npm test` | Check browser rendering, asset loading, and content boundaries |
+| `npm run test:skill` | Check skill initialization, installation, and preservation of existing files |
 
 Before exporting PDFs or running tests, run `npx playwright install chromium`. On Linux, use `npx playwright install --with-deps chromium` to install system dependencies as well. Run PDF exports locally. In a browser editing environment, you can build the website and then use the browser's print function.
 
@@ -179,6 +180,35 @@ Use three to five stages for a timeline. Bar charts are intended for nonnegative
 Provide [AI_PROMPT.md (Chinese)](docs/AI_PROMPT.md), `slides.md`, and your verified source materials to your AI assistant. The prompt covers available layouts, slot syntax, content length, and citation requirements. Replace the starter's content without asking the assistant to recreate the theme's styles.
 
 See [AGENTS.md](AGENTS.md) for repository maintenance and AI editing guidance. Keep `[待补充]` (“to be added”) placeholders when data or references are missing, and manually verify every chart, citation, and conclusion before submission.
+
+## Agent Skill
+
+The repository includes the [bit-slidev skill](.agents/skills/bit-slidev/SKILL.md), with layout interfaces, a nine-slide starter, project initialization, and preview checks. Codex discovers repository skills under `.agents/skills/`; see the [official skill documentation](https://learn.chatgpt.com/docs/build-skills) for directory conventions.
+
+Invoke it in this repository:
+
+```text
+$bit-slidev Create a 12-slide BIT thesis defense from my supplied research materials, including speaker notes and a PDF.
+```
+
+To use it in other projects, run this command from the repository root:
+
+```bash
+node .agents/skills/bit-slidev/scripts/install_skill.mjs
+```
+
+The installer copies the complete skill to `~/.agents/skills/bit-slidev` and refuses to overwrite an existing destination. Use `--dest /path/to/bit-slidev` to select another location. For other tools supporting Agent Skills, copy the whole `bit-slidev` folder to the tool's skill directory. If it does not appear in the skill list, reopen your session.
+
+Agents can also initialize a project directly. The script does not access the network or install dependencies and refuses nonempty destinations:
+
+```bash
+node .agents/skills/bit-slidev/scripts/init_deck.mjs ./my-defense
+cd my-defense
+npm install
+npm run dev
+```
+
+When invoking it elsewhere, use the actual path to the installed skill's script. Add `--theme /path/to/slidev-theme-bit` to reuse local theme sources; otherwise it uses a pinned GitHub theme archive. The skill guides material verification, attribution, and layout review. Creating a report does not automatically publish it.
 
 ## Publish your presentation
 

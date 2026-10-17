@@ -18,6 +18,7 @@ This repository is an unofficial Slidev theme for Beijing Institute of Technolog
 - Keep text, equations, tables and data components editable. Do not flatten slides into backgrounds.
 - Do not introduce online font or image dependencies. Preserve Chinese font fallbacks.
 - Root `slides.md` is the editable starter; `example.md` demonstrates every layout and option.
+- The reusable authoring skill lives in `.agents/skills/bit-slidev/`. Keep its layout reference and initializer compatible with the theme. Its installed copy must work outside this repository; do not embed machine-specific paths.
 - Verify meaningful rendering changes in a browser and inspect all affected layouts at 1280 × 720.
 
 ## Verification

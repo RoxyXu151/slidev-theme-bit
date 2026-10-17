@@ -49,6 +49,7 @@ npm run dev:starter
 | `npm run export` | 将答辩起步稿导出为 `slides.pdf` |
 | `npm run export:example` | 将演示导出为 `example.pdf` |
 | `npm test` | 检查浏览器渲染、素材加载和内容边界 |
+| `npm run test:skill` | 检查技能初始化、安装和已有文件保护 |
 
 PDF 导出或测试前先运行 `npx playwright install chromium`。Linux 上可运行 `npx playwright install --with-deps chromium` 安装系统依赖。导出需要在本机运行，浏览器编辑环境可先构建网页，再使用浏览器打印功能。
 
@@ -177,6 +178,35 @@ fit: contain
 将 [AI_PROMPT.md](docs/AI_PROMPT.md)、`slides.md` 和经过核实的材料一起提供给 AI。提示词包含可用版式、插槽语法、内容长度和引用要求。只需替换起步稿的内容，不必让 AI 从头生成样式代码。
 
 项目维护和 AI 修改规范见 [AGENTS.md](AGENTS.md)。数据与文献缺失时保留 `[待补充]`，提交前人工检查所有图表、引用与结论。
+
+## Agent Skill
+
+仓库附带 [bit-slidev 技能](.agents/skills/bit-slidev/SKILL.md)，包含版式接口、9 页起步稿、项目初始化和预览检查流程。Codex 支持从仓库的 `.agents/skills/` 发现技能；目录约定见 [官方技能文档](https://learn.chatgpt.com/docs/build-skills)。
+
+在本仓库中可以直接调用：
+
+```text
+$bit-slidev 请根据我提供的论文材料制作一份 12 页的北理工答辩演示，包含讲稿和 PDF。
+```
+
+若要在其他项目中使用，在本仓库根目录执行：
+
+```bash
+node .agents/skills/bit-slidev/scripts/install_skill.mjs
+```
+
+安装器将完整技能复制到 `~/.agents/skills/bit-slidev`，不覆盖已有目录。可通过 `--dest /path/to/bit-slidev` 指定安装位置。其他支持 Agent Skills 的工具可将整个 `bit-slidev` 目录放入各自的技能目录。若技能未出现在列表中，重新打开会话。
+
+Agent 也可以直接初始化项目（脚本不联网、不安装依赖，拒绝写入非空目录）：
+
+```bash
+node .agents/skills/bit-slidev/scripts/init_deck.mjs ./my-defense
+cd my-defense
+npm install
+npm run dev
+```
+
+从其他位置调用时，将脚本路径替换为已安装技能中的实际路径。已有本地主题源码时，可为初始化命令添加 `--theme /path/to/slidev-theme-bit`。默认使用固定版本的 GitHub 主题安装包。技能会要求 Agent 核对材料、保留来源并检查排版；生成报告不会自动将内容公开发布。
 
 ## 发布自己的演示
 

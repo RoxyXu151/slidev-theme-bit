@@ -4,7 +4,7 @@
 
 1. 使用 Node.js 22.12 或以上，运行 `npm ci`。
 2. 运行 `npm run dev` 检查完整主题，`npm run dev:starter` 检查起步稿。
-3. 运行 `npm run build`、`npm run build:starter`、`npx playwright install chromium` 和 `npm test`。
+3. 运行 `npm run build`、`npm run build:starter`、`npx playwright install chromium` 和 `npm test`。修改技能时还需运行 `npm run test:skill`。
 4. 如修改版式或字体，检查全屏、演讲者视图和 PDF 中的中文换行及图片比例。使用 `npm run export:example` 导出核对。
 5. 在 PR 中说明具体场景、变更和验证方法，视觉变化附修改前后截图。
 
