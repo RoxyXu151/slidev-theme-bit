@@ -1,5 +1,7 @@
 # slidev-theme-bit
 
+[简体中文](README.md) · [English](README.en.md)
+
 **北京理工大学 Slidev 学术答辩主题**
 
 把熟悉的北理工 PPT 风格带到浏览器，用 Markdown、Vue 与 AI 辅助完成课程展示、组会汇报和论文答辩。

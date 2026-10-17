@@ -9,7 +9,7 @@
   "homepage": "https://roxyxu151.github.io/slidev-theme-bit/",
   "bugs": "https://github.com/RoxyXu151/slidev-theme-bit/issues",
   "keywords": ["slidev", "slidev-theme", "bit", "beijing-institute-of-technology", "北京理工大学", "thesis", "academic"],
-  "files": ["assets", "components", "composables", "layouts", "styles", "docs", "example.md", "slides.md", "README.md", "LICENSE", "NOTICE.md", "AGENTS.md", "CONTRIBUTING.md"],
+  "files": ["assets", "components", "composables", "layouts", "styles", "docs", "example.md", "slides.md", "README.md", "README.en.md", "LICENSE", "NOTICE.md", "AGENTS.md", "CONTRIBUTING.md"],
   "engines": { "node": ">=22.18.0", "slidev": ">=53.0.0" },
   "scripts": {
     "dev": "slidev example.md",
