@@ -81,6 +81,7 @@ image: /missing-figure.png
     assert.ok(codes.has(code), `${code} not detected: ${JSON.stringify(report.issues)}`)
   assert.ok(report.errors > 0)
   assert.ok(report.warnings > 0)
+  assert.ok(!codes.has('RUNTIME_ERROR'), 'Browser permission failures must not masquerade as content faults')
   assert.equal(await readFile(entry, 'utf8'), source)
   assert.equal(JSON.parse(await readFile(path.join(out, 'report.json'), 'utf8')).totalSlides, 6)
   assert.ok((await readFile(path.join(out, 'slide-04.png'))).length > 1000)

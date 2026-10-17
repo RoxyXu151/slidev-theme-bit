@@ -48,7 +48,7 @@ export async function checkDeck(options) {
     }
     base = base.replace(/\/?$/, '/')
     browser = await chromium.launch({ headless: true, ...(options.browser ? { channel: options.browser } : {}) })
-    const page = await browser.newPage({ viewport: { width: 1280, height: 720 }, deviceScaleFactor: 1, reducedMotion: 'reduce' })
+    const page = await browser.newPage({ viewport: { width: 1280, height: 720 }, deviceScaleFactor: 1, reducedMotion: 'reduce', permissions: ['screen-wake-lock'] })
     const pages = [], issues = []
     let runtimeErrors = []
     page.on('pageerror', error => runtimeErrors.push(error.message))
