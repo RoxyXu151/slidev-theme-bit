@@ -32,16 +32,18 @@ subtitle: BACKGROUND
 # 研究背景
 ```
 
-4. 版式：`default`（默认正文）、`toc`（有序列表）、`section`（章节）、`two-cols`、`image-left`、`image-right`、`figure`、`quote`、`center`、`end`。
+4. 版式：`default`（默认正文）、`toc`（有序列表）、`section`（章节）、`two-cols`、`image-left`、`image-right`、`figure`、`quote`、`center`、`end`；丰富正文可用 `sidebar`、`compare`、`steps`、`grid`、`focus`、`image-story`，接口见 [构图指南](LAYOUTS.md)。
 5. `two-cols`：默认内容只放总标题，`::left::` 和 `::right::` 后分别填写两栏内容。每栏建议不超过 3 条简短要点。
 6. `image-left` / `image-right`：`::title::` 后放一级标题，默认内容放文字，YAML 的 `image: /filename.png` 引用用户 `public/` 目录下的真实图片，写清 `imageAlt`、`caption`，默认 `fit: contain`。
 7. `figure`：默认内容放标题，YAML 用 `image` 和 `caption`，或在 `::figure::` 后放图。图片缺失时用 `[待补充：所需图及来源]`，不得编造文件路径。
 8. 正文页可写 `section` 和 `sectionNumber`，用于页眉。`quote` 使用 `author` 标注出处。`end` 可以重复填写 `presenter`、`advisor`，不会自动继承第一页的这些信息。
 9. 数学用 `$...$` 或 `$$...$$`，代码用带语言名的代码块。每页末尾的 HTML 注释写讲稿。
-10. `BitCallout`、`BitBarChart`、`BitTimeline` 可按 README 的接口使用。数据组件必须基于用户提供的真实数据，不要把主题演示数据当成研究结果。
+10. `BitCallout`、`BitBarChart`、`BitTimeline`、`BitMetrics` 可按 README 的接口使用。数据组件必须基于用户提供的真实数据，不要把主题演示数据当成研究结果。
 
 ## 内容与排版
 
+- 根据内容选择构图：问题用侧栏、方法比较用绿白对照、三步流程用 steps、四个短观点用 grid、公式或关键数字用 focus、照片叙事用 image-story。不要连续多页只排标题与列表。
+- 标题可用 `titleStyle: plain / rail / band / classic`。统一报告的页眉与页脚，避免为了变化而随意更换学校标识；内容过长时拆页。
 - 每页只讲一个明确主题，标题具体，避免“赋能”“全面升级”等空泛措辞。
 - 正文建议不超过 5 条要点，每条尽量不超过两行。空间不足时拆页，不能通过缩小字体堆砌内容。
 - 保留研究问题、方法、实验条件、结果、局限和引用之间的逻辑关系。

@@ -22,6 +22,12 @@ const slides = [
   ['bit-default', 'Markdown 与 AI 协作'],
   ['bit-figure', '大图与图注'],
   ['bit-center', '参考资料'],
+  ['bit-compare', '绿白对照'],
+  ['bit-steps', '三段递进'],
+  ['bit-grid', '四个维度'],
+  ['bit-sidebar', '侧栏提问'],
+  ['bit-focus', '关键数字'],
+  ['bit-image-story', '图片与文字叠放'],
   ['bit-ending', '感谢各位老师'],
 ]
 
@@ -42,7 +48,7 @@ for (const [index, [layout, title]] of slides.entries()) {
     // Content must fit the slide canvas; decorative backgrounds may extend.
     const overflow = await slide.evaluate(root => {
       const bounds = root.getBoundingClientRect()
-      const candidates = root.querySelectorAll('h1, h2, h3, p, li, pre, table, .bit-cover-meta, .bit-image-copy, .bit-timeline, .bit-bar-chart')
+      const candidates = root.querySelectorAll('h1, h2, h3, p, li, dt, dd, pre, table, .bit-cover-meta, .bit-image-copy, .bit-timeline, .bit-bar-chart')
       return [...candidates].flatMap(element => {
         const rect = element.getBoundingClientRect()
         if (!rect.width || !rect.height) return []
@@ -106,4 +112,20 @@ test('formula, code and data components remain structured', async ({ page }) => 
   await expect(page.locator('#slide-content .bit-bar-chart')).toContainText('演示数据')
   await page.goto('/16')
   await expect(page.locator('#slide-content .bit-timeline > li')).toHaveCount(4)
+})
+
+test('new compositions expose editable content and distinct title treatments', async ({ page }) => {
+  for (const [index, selector, count] of [[21, '.bit-compare-panels > div', 2], [22, '.bit-step-columns > div', 3], [23, '.bit-grid-panels > div', 4], [25, '.bit-metrics dt', 3]] as const) {
+    await page.goto(`/${index}`)
+    const slide = page.locator(`#slide-content .slidev-page-${index}`)
+    await expect(slide.locator(selector)).toHaveCount(count)
+  }
+  for (const [index, style] of [[4, 'classic'], [9, 'band'], [10, 'rail'], [16, 'plain']] as const) {
+    await page.goto(`/${index}`)
+    const root = page.locator(`#slide-content .slidev-page-${index} .slidev-layout`)
+    await expect(root).toHaveClass(new RegExp(`bit-title-${style}`))
+    const heading = root.locator('h1').first()
+    const underline = await heading.evaluate(el => getComputedStyle(el, '::after').content)
+    expect(underline === 'none' || underline === 'normal').toBe(style !== 'classic')
+  }
 })

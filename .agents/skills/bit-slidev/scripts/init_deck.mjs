@@ -4,7 +4,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const skillRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const themeArchive = 'https://github.com/RoxyXu151/slidev-theme-bit/releases/download/v0.2.0/slidev-theme-bit-0.2.0.tgz'
+const themeArchive = 'https://github.com/RoxyXu151/slidev-theme-bit/releases/download/v0.3.0/slidev-theme-bit-0.3.0.tgz'
 const templates = {
   defense: { file: 'starter.md', label: '学位论文答辩', pages: 9 },
   paper: { file: 'paper.md', label: '论文阅读汇报', pages: 12 },

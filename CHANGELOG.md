@@ -1,5 +1,15 @@
 # 更新记录 / Changelog
 
+## 0.3.0
+
+- 参考原 PPT 第 75、79、80、99、116 页，增加绿白对照、三段递进、四宫格、侧栏、公式/数字聚焦与图文叠放六种正文构图。
+- `titleStyle: classic / plain / rail / band`：旧稿保留经典红短线，新稿可选择无装饰、绿竖线与绿底标题带；支持全局和单页设置。
+- 新增可编辑 `BitMetrics` 关键数字组件；检查器纳入数字与标签的边界检查。
+- 主题展示扩展到 27 页；14 页 Transformer 论文示例重新排版，三类起步稿、Skill、AI 提示词与中英文 README 同步。
+- 保留统一北理工页眉、页脚、配色和素材权利说明；图文、公式、表格、数字仍可分别编辑。
+
+Six source-inspired body compositions, four title treatments, editable key figures, a redesigned paper example, and updated bilingual documentation and authoring guidance.
+
 ## 0.2.0
 
 - 三类起步稿：论文阅读 12 页、组会汇报 8 页、答辩 9 页；初始化器支持场景选择，附独立报告检查器。

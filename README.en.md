@@ -62,9 +62,10 @@ The starter, showcase, AI prompt, and some built-in labels are in Simplified Chi
 
 - Four cover and closing styles: classic white, solid green, campus photo, and campus panorama
 - Contents, light and dark section dividers, body slides, two columns, images on either side, full figures, quotations, and centered content
-- Three body-slide header styles, automatic page numbers, configurable footers and colors
+- Six additional compositions: green/white comparison, three stages, four viewpoints, sidebar, equation/key figures, and overlapping photo/text
+- Four title treatments, three header styles, automatic page numbers, configurable footers and colors
 - Local Chinese font fallbacks, with Slidev support for equations, code highlighting, and speaker notes
-- Editable bar charts, research timelines, and callouts
+- Editable key figures, bar charts, research timelines, and callouts
 - A GitHub Pages demo, continuous integration, and installation in existing projects
 
 ## Common commands
@@ -98,7 +99,7 @@ The checker starts and closes an independent preview without changing source fil
 Install the theme from GitHub. **These instructions do not require or assume publication to npm.**
 
 ```bash
-npm install github:RoxyXu151/slidev-theme-bit#v0.2.0
+npm install github:RoxyXu151/slidev-theme-bit#v0.3.0
 ```
 
 Add the following configuration to the first slide of your project:
@@ -139,6 +140,14 @@ Separate slides with `---`. The first slide defaults to `cover`; subsequent slid
 | `quote` | Quotation | Default slot for the quotation; `author` for its source |
 | `center` | Centered content | Default slot |
 | `end` | Closing slide | Same interface as `cover` |
+| `compare` | Green/white comparison panels | Default title; `::left::`, `::right::`, optional `::note::` |
+| `steps` | Three-stage progression | Default title; `::first::`, `::second::`, `::third::`, optional `::note::` |
+| `grid` | Four concise viewpoints | Default title; `::first::` through `::fourth::`, optional `::note::` |
+| `sidebar` | Question sidebar with supporting content | Default short title; `::body::`, optional `::summary::`; `eyebrow` label |
+| `focus` | Central equation or key figures | Default title; `::focus::`, `::explanation::`, optional `::note::` |
+| `image-story` | Photo with overlapping text panel | Default body; `::title::`; `image` or `::image::` |
+
+**Vary the composition to suit the content.** Set `titleStyle: classic / plain / rail / band` on a slide or in `themeConfig` for a red underline, undecorated title, green vertical rule, or green title band. Existing slides keep the classic default; new compositions default to plain or rail. Per-slide settings override deck settings, which override layout defaults. See the [composition guide and original PPT references (Chinese)](docs/LAYOUTS.md).
 
 Image and figure layouts support `caption`, `imageAlt`, and `fit: contain / cover`. The default, `contain`, preserves the entire image. The `photo` and `panorama` covers accept an `image` override and otherwise use a campus photo from the original template.
 
@@ -183,11 +192,20 @@ Describe the experimental conditions shown in the image.
 # Experimental Platform
 ```
 
-`themeConfig` supports `primary` (default `#006C39`), `accent` (default `#A13F3D`), `footer`, `motto`, `showPageNumber`, and `headerStyle` (`classic`, `minimal`, or `building`). You can also override these options on individual slides. Set `footer: false` to hide a body slide's footer, or `showPageNumber: false` to hide only the page number. Cover metadata comes from the current slide; repeat the fields you need on additional covers and closing slides.
+`themeConfig` supports `primary` (default `#006C39`), `accent` (default `#A13F3D`), `footer`, `motto`, `showPageNumber`, `titleStyle`, and `headerStyle` (`classic`, `minimal`, or `building`). You can also override these options on individual slides. Set `footer: false` to hide a body slide's footer, or `showPageNumber: false` to hide only the page number. Cover metadata comes from the current slide; repeat the fields you need on additional covers and closing slides.
 
 The theme uses a **16:9, 1280 × 720** design canvas. For projection readability, aim for no more than five bullet points per body slide and split long passages across slides. Install Chinese fonts on your system; the theme does not download online fonts. It prefers Microsoft YaHei on Windows and PingFang SC on macOS. On Linux, you can install Noto Sans CJK.
 
 ## Academic components
+
+`BitMetrics` displays two or three editable key figures with units, labels, and context:
+
+```vue
+<BitMetrics :items="[
+  { value: '128', label: 'Sample size', detail: 'Demonstration data' },
+  { value: '86%', label: 'Example score', detail: 'Demonstration, not a research result', accent: true }
+]" />
+```
 
 ```vue
 <BitCallout title="Key Finding">State an evidence-supported conclusion.</BitCallout>

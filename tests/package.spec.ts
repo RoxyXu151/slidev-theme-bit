@@ -27,6 +27,7 @@ themeConfig:
   footer: 独立项目
   primary: '#174c43'
   showPageNumber: false
+  titleStyle: band
 ---
 
 # 独立安装主题
@@ -40,6 +41,7 @@ footer: false
 ---
 showPageNumber: true
 footer: 单页页脚
+titleStyle: plain
 ---
 
 # 单页覆盖
@@ -96,11 +98,13 @@ image: /experiment.png
     await expect(second).toContainText('隐藏页脚')
     await expect(second.locator('.bit-footer')).toHaveCount(0)
     await expect(second.locator('.bit-frame')).toHaveCSS('--bit-green', '#174c43')
+    await expect(second.locator('.bit-frame')).toHaveClass(/bit-title-band/)
     await page.goto(`${base}/3`)
     const third = page.locator('#slide-content .slidev-page-3')
     await expect(third.locator('.bit-footer')).toContainText('单页页脚')
     await expect(third.locator('.bit-page')).toContainText('3')
     await expect(third.locator('.bit-callout')).toContainText('组件随主题安装')
+    await expect(third.locator('.bit-frame')).toHaveClass(/bit-title-plain/)
     for (const index of [4, 5]) {
       await page.goto(`${base}/${index}`)
       const slide = page.locator(`#slide-content .slidev-page-${index}`)

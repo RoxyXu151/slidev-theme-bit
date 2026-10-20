@@ -28,6 +28,7 @@ layout: toc
 2. [学术表达](8)
 3. [图文与数据](12)
 4. [写作与分享](17)
+5. [丰富正文排版](21)
 
 ---
 layout: section
@@ -99,6 +100,7 @@ subtitle: ACADEMIC EXPRESSION
 
 ---
 layout: two-cols
+titleStyle: band
 section: 学术表达
 sectionNumber: '02'
 ---
@@ -128,6 +130,7 @@ sectionNumber: '02'
 ---
 section: 学术表达
 sectionNumber: '02'
+titleStyle: rail
 ---
 
 # 数学公式与代码
@@ -157,6 +160,7 @@ sectionNumber: '02'
 
 ---
 layout: image-right
+titleStyle: plain
 section: 图文与数据
 sectionNumber: '03'
 caption: 校园建筑照片，取自原 PPT 模板
@@ -180,6 +184,7 @@ caption: 校园建筑照片，取自原 PPT 模板
 
 ---
 layout: image-left
+titleStyle: rail
 section: 图文与数据
 sectionNumber: '03'
 caption: 校园全景，取自原 PPT 模板
@@ -203,6 +208,7 @@ caption: 校园全景，取自原 PPT 模板
 section: 图文与数据
 sectionNumber: '03'
 headerStyle: building
+titleStyle: band
 ---
 
 # 表格中的实验设置
@@ -219,6 +225,7 @@ headerStyle: building
 ---
 section: 图文与数据
 sectionNumber: '03'
+titleStyle: rail
 ---
 
 # 数据图表
@@ -232,6 +239,7 @@ sectionNumber: '03'
 ---
 section: 图文与数据
 sectionNumber: '03'
+titleStyle: plain
 ---
 
 # 研究计划与进度
@@ -254,6 +262,7 @@ subtitle: WRITING & SHARING
 ---
 section: 写作与分享
 sectionNumber: '04'
+titleStyle: plain
 ---
 
 # Markdown 与 AI 协作
@@ -267,6 +276,7 @@ sectionNumber: '04'
 
 ---
 layout: figure
+titleStyle: plain
 section: 写作与分享
 sectionNumber: '04'
 caption: 示例大图页，图片来自原 PPT 模板
@@ -280,6 +290,7 @@ caption: 示例大图页，图片来自原 PPT 模板
 
 ---
 layout: center
+titleStyle: plain
 section: 写作与分享
 sectionNumber: '04'
 ---
@@ -289,6 +300,176 @@ sectionNumber: '04'
 [Slidev 官方文档](https://sli.dev)　[项目源码](https://github.com/RoxyXu151/slidev-theme-bit)
 
 <p class="bit-note">视觉来源：韩宇《北京理工大学学术答辩 PPT 模板正式版》，2019 年 5 月 10 日。<br>主题代码采用 MIT 许可，原模板素材的权利说明见 NOTICE.md。</p>
+
+---
+layout: compare
+section: 丰富正文排版
+sectionNumber: '05'
+---
+
+# 绿白对照：让两种观点形成关系
+
+::left::
+
+## 已有方法
+
+把问题、约束和关键假设放在同一侧，建立比较基准。
+
+- 它解决了什么问题？
+- 哪些条件限制了它？
+
+::right::
+
+## 本文方法
+
+沿相同维度解释改变，避免两栏分别罗列不相关的内容。
+
+- 哪个机制发生了变化？
+- 用什么证据验证收益？
+
+::note::
+
+排版参考原 PPT 第 75 页。颜色用于区分观点，不表示优劣或真实实验结论。
+
+---
+layout: steps
+section: 丰富正文排版
+sectionNumber: '05'
+---
+
+# 三段递进：从问题走向证据
+
+::first::
+
+## 明确问题
+
+用一句具体的问题界定研究范围，说明为什么值得解决。
+
+::second::
+
+## 解释方法
+
+交代输入、计算过程与输出，突出最关键的一步设计。
+
+::third::
+
+## 给出证据
+
+用同一评价口径说明结果，并保留适用条件和局限。
+
+::note::
+
+排版参考原 PPT 第 79 页。适合三步流程、三项贡献或三个讨论维度。
+
+---
+layout: grid
+section: 丰富正文排版
+sectionNumber: '05'
+---
+
+# 四个维度，同页核对
+
+::first::
+
+## 数据与划分
+
+样本来自哪里？训练、验证、测试如何区分？
+
+::second::
+
+## 对照与指标
+
+比较条件是否一致？指标的单位与方向是什么？
+
+::third::
+
+## 参数与环境
+
+提供关键超参数、运行环境与随机种子。
+
+::fourth::
+
+## 结论与边界
+
+哪些结论有证据？哪些情形尚未得到验证？
+
+::note::
+
+排版参考原 PPT 第 80 页。四宫格适合短观点，长段落应拆页。
+
+---
+layout: sidebar
+eyebrow: RESEARCH QUESTION
+section: 丰富正文排版
+sectionNumber: '05'
+---
+
+# 侧栏提问
+
+::summary::
+
+用颜色和空间区分“核心问题”与“支持材料”。
+
+::body::
+
+## 先给读者一个明确的关注点
+
+左侧保留短标题与一句提要；右侧展开解释、表格或图表。
+
+## 再组织能够回答问题的证据
+
+适用于背景动机、研究贡献、讨论总结，也能容纳关键数字与解释。
+
+<p class="bit-note">结合原 PPT 的左侧色块、目录侧栏与图文页构图整理。页眉、页脚仍保持统一。</p>
+
+---
+layout: focus
+section: 丰富正文排版
+sectionNumber: '05'
+---
+
+# 关键数字，先看量级再读解释
+
+::focus::
+
+<BitMetrics :items="[
+  { value: '128', label: '样本量', detail: '演示数据 · 例' },
+  { value: '86%', label: '指标示例', detail: '演示数据 · 非实验结果' },
+  { value: '3.2 s', label: '单次耗时', detail: '演示数据 · 需注明环境', accent: true }
+]" />
+
+::explanation::
+
+- **保留单位** 数值旁写清指标与单位。
+- **保留条件** 说明样本、环境与评价口径。
+- **保留证据** 真实报告应补充原始结果来源。
+
+::note::
+
+参考原 PPT 第 116 页的“大数字 + 解释”层级。也可将中间区域替换为可编辑公式。
+
+---
+layout: image-story
+section: 丰富正文排版
+sectionNumber: '05'
+caption: 校园照片取自原 PPT 模板
+---
+
+图片承担主要视觉，白色文字板适度叠放，形成前后层次。
+
+## 适合场景
+
+研究对象、实验场地、仪器设备或项目背景。
+
+::title::
+
+# 图片与文字叠放
+
+::image::
+
+<img src="./assets/campus-building.webp" alt="原 PPT 中的校园建筑" style="object-fit:cover" />
+
+<!-- 排版参考原 PPT 第 99 页。科研图默认contain，装饰照片才使用cover。文字与照片保持可分别编辑。 -->
 
 ---
 layout: end

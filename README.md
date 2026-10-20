@@ -60,9 +60,10 @@ npm run dev
 
 - 四种封面与致谢风格：经典白底、纯绿、校园照片、校园全景
 - 目录、深浅两种章节页、正文、双栏、左右图文、大图、引文、居中页
-- 三种正文页眉，自动页码，可调整页脚和配色
+- 六种新增正文构图：绿白对照、三段递进、四宫格、侧栏、公式/数字聚焦、图文叠放
+- 四种标题处理：经典红短线、无装饰、绿色竖线、绿色标题带；三种页眉与自动页码
 - 本地中文字体回退，支持 Slidev 的公式、代码高亮与演讲者备注
-- 可编辑的数据条形图、研究时间轴和提示块
+- 可编辑的关键数字、数据条形图、研究时间轴和提示块
 - GitHub Pages 在线演示、持续集成、独立项目安装方式
 
 ## 常用操作
@@ -96,7 +97,7 @@ PDF 导出或测试前先运行 `npx playwright install chromium`。Linux 上可
 本主题从 GitHub 安装，**目前不要求或假定已发布到 npm**：
 
 ```bash
-npm install github:RoxyXu151/slidev-theme-bit#v0.2.0
+npm install github:RoxyXu151/slidev-theme-bit#v0.3.0
 ```
 
 在已有项目的第一页配置中添加：
@@ -137,6 +138,14 @@ themeConfig:
 | `quote` | 引文 | 默认插槽放引文，`author` 放出处 |
 | `center` | 居中内容 | 默认插槽 |
 | `end` | 致谢 | 与 `cover` 相同 |
+| `compare` | 绿白整块对照 | 默认标题，`::left::`、`::right::`，可选 `::note::` |
+| `steps` | 三段递进 | 默认标题，`::first::`、`::second::`、`::third::`，可选 `::note::` |
+| `grid` | 四宫格观点 | 默认标题，`::first::` 至 `::fourth::`，可选 `::note::` |
+| `sidebar` | 侧栏问题与正文 | 默认短标题，`::body::`、可选 `::summary::`，`eyebrow` 为眉题 |
+| `focus` | 公式与关键数字 | 默认标题，`::focus::`、`::explanation::`，可选 `::note::` |
+| `image-story` | 图片与文字板叠放 | 默认正文，`::title::`，`image` 或 `::image::` |
+
+**正文不必都用“加粗标题 + 红短线”。** `titleStyle: classic / plain / rail / band` 可在单页或 `themeConfig` 中设置。旧稿保留经典默认，新构图默认使用 plain 或 rail；单页设置优先于全局，全局优先于布局默认。[构图选择、原 PPT 对照与可复制示例](docs/LAYOUTS.md)。
 
 图文与大图布局支持 `caption`、`imageAlt`、`fit: contain / cover`。默认 `contain` 保留整张图片。封面 `photo` 与 `panorama` 可通过 `image` 替换照片，默认使用原模板校园图。
 
@@ -181,11 +190,20 @@ fit: contain
 # 实验平台
 ```
 
-`themeConfig` 支持 `primary`（默认 `#006C39`）、`accent`（默认 `#A13F3D`）、`footer`、`motto`、`showPageNumber` 与 `headerStyle`（`classic`、`minimal`、`building`）。这些选项也可在单页覆盖。`footer: false` 隐藏正文页脚，`showPageNumber: false` 只隐藏页码。封面信息默认来自该页，请在其他封面或致谢页填写需要显示的信息。
+`themeConfig` 支持 `primary`（默认 `#006C39`）、`accent`（默认 `#A13F3D`）、`footer`、`motto`、`showPageNumber` 、`titleStyle` 与 `headerStyle`（`classic`、`minimal`、`building`）。这些选项也可在单页覆盖。`footer: false` 隐藏正文页脚，`showPageNumber: false` 只隐藏页码。封面信息默认来自该页，请在其他封面或致谢页填写需要显示的信息。
 
 主题以 **16:9、1280 × 720** 为设计画布。为了投影可读性，正文建议每页不超过 5 条要点；大段文字应拆页。系统需安装中文字体，主题不下载在线字体。Windows 优先使用微软雅黑，macOS 使用苹方，Linux 可安装 Noto Sans CJK。
 
 ## 学术组件
+
+`BitMetrics` 用于 2–3 个关键数字，保持数值、单位、标签与解释可编辑：
+
+```vue
+<BitMetrics :items="[
+  { value: '128', label: '样本量', detail: '演示数据' },
+  { value: '86%', label: '指标示例', detail: '演示数据，非实验结果', accent: true }
+]" />
+```
 
 ```vue
 <BitCallout title="主要发现">写下有证据支持的结论。</BitCallout>

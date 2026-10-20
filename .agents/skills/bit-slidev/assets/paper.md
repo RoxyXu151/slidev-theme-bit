@@ -24,11 +24,15 @@ layout: toc
 4. [讨论与局限](10)
 
 ---
+layout: sidebar
+eyebrow: RESEARCH QUESTION
 section: 研究问题
 sectionNumber: '01'
 ---
 
 # 研究问题
+
+::body::
 
 - 研究对象：[待补充]
 - 已有方法的具体困难：[待补充，注明论文章节]
@@ -39,7 +43,7 @@ sectionNumber: '01'
 <!-- 只讲一个具体问题；说明它为什么值得研究。来源：待补充。 -->
 
 ---
-layout: two-cols
+layout: compare
 section: 研究问题
 sectionNumber: '01'
 ---
@@ -65,32 +69,52 @@ sectionNumber: '01'
 <!-- 对比同一个问题的处理方式，不机械罗列相关工作。来源：待补充。 -->
 
 ---
+layout: steps
 section: 方法概览
 sectionNumber: '02'
 ---
 
 # 方法概览
 
-<BitTimeline :items="[
-  { date: '输入', title: '准备材料', description: '[待补充：输入及预处理]' },
-  { date: '核心模块', title: '方法计算', description: '[待补充：核心机制]' },
-  { date: '输出', title: '得到结果', description: '[待补充：输出及使用方式]' }
-]" />
+::first::
 
-<BitCallout title="关键设计">[待补充：解释每个模块为何必要，而不只是复述箭头]</BitCallout>
+## 准备输入
+
+[待补充：输入及预处理]
+
+::second::
+
+## 核心计算
+
+[待补充：核心机制与设计依据]
+
+::third::
+
+## 得到输出
+
+[待补充：输出及使用方式]
+
+::note::
+
+[待补充：解释每个模块为何必要，而不只是复述箭头]
 
 <!-- 如需原论文架构图，用figure布局替换此页，并把图放到public/，保留出处。 -->
 
 ---
+layout: focus
 section: 方法概览
 sectionNumber: '02'
 ---
 
 # 核心公式或算法
 
+::focus::
+
 ## 输入、变量与目标
 
 [待补充：公式或伪代码。使用真实论文符号，解释变量与维度]
+
+::explanation::
 
 ## 直观解释
 
@@ -116,6 +140,7 @@ sectionNumber: '02'
 ---
 section: 实验设置
 sectionNumber: '03'
+titleStyle: band
 ---
 
 # 实验设置
@@ -147,6 +172,7 @@ caption: '[待补充：图表编号、样本量、误差与来源]'
 ---
 section: 讨论与局限
 sectionNumber: '04'
+titleStyle: rail
 ---
 
 # 讨论与局限

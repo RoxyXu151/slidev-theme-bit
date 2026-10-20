@@ -16,7 +16,7 @@ export function inspectSlide(root) {
   const bottom = footer ? footer.getBoundingClientRect().top - 6 * scale : bounds.bottom - 20 * scale
   const header = root.querySelector('.bit-header')
   const top = header ? header.getBoundingClientRect().bottom + 8 * scale : bounds.top
-  const elements = [...main.querySelectorAll('h1,h2,h3,p,li,pre,table,figure,img,.bit-callout,.bit-timeline,.bit-bar-chart,.katex-display')].filter(visible)
+  const elements = [...main.querySelectorAll('h1,h2,h3,p,li,dt,dd,pre,table,figure,img,.bit-callout,.bit-timeline,.bit-bar-chart,.katex-display')].filter(visible)
   for (const el of elements) {
     const r = el.getBoundingClientRect()
     if (r.left < bounds.left - tolerance || r.right > bounds.right + tolerance || r.bottom > bounds.bottom + tolerance || r.top < bounds.top - tolerance)

@@ -18,6 +18,7 @@ themeConfig:
 ---
 section: 目标与进展
 sectionNumber: '01'
+titleStyle: rail
 ---
 
 # 上次目标，这次完成了什么？
@@ -31,7 +32,7 @@ sectionNumber: '01'
 <!-- 只填写实际完成的工作。没完成的任务说明原因，不能用计划代替成果。 -->
 
 ---
-layout: two-cols
+layout: compare
 section: 目标与进展
 sectionNumber: '01'
 ---
@@ -56,6 +57,7 @@ sectionNumber: '01'
 
 ---
 layout: figure
+titleStyle: plain
 section: 实验与证据
 sectionNumber: '02'
 caption: '[待补充：数据来源、实验配置、样本量与误差]'
@@ -70,11 +72,15 @@ caption: '[待补充：数据来源、实验配置、样本量与误差]'
 <!-- 图表放在public/；说明与上次相比改变了什么，以及变化是否稳定。 -->
 
 ---
+layout: sidebar
+eyebrow: DISCUSSION
 section: 实验与证据
 sectionNumber: '02'
 ---
 
-# 当前阻碍与失败分析
+# 失败分析
+
+::body::
 
 - 具体失败现象：[待补充]
 - 已经排查的原因：[待补充]
@@ -87,6 +93,7 @@ sectionNumber: '02'
 ---
 section: 下一步计划
 sectionNumber: '03'
+titleStyle: band
 ---
 
 # 下一步计划

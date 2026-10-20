@@ -25,11 +25,21 @@ layout: toc
 <!-- 路线：先解释注意力计算，再看编码器与解码器如何组合，最后区分翻译测试结果、开发集消融和自己的分析。 -->
 
 ---
+layout: sidebar
+eyebrow: RESEARCH QUESTION
 section: 研究问题
 sectionNumber: '01'
 ---
 
 # 研究问题
+
+::summary::
+
+如何缩短序列中不同位置之间的计算路径？
+
+::body::
+
+## 从逐步计算到直接交互
 
 - 循环网络需要沿序列逐步计算，限制训练并行性。
 - 远距离位置的信息交互，需要经过较长计算路径。
@@ -42,19 +52,26 @@ sectionNumber: '01'
 <!-- 从计算依赖理解动机：训练数据的目标序列已知，可以并行计算不同位置的表示；自回归推理时仍依赖已经生成的词。这两个阶段不应混淆。 -->
 
 ---
+layout: focus
 section: 注意力计算
 sectionNumber: '02'
 ---
 
-# 缩放点积注意力：按相关性汇总信息
+# 缩放点积注意力
+
+::focus::
 
 $$
 \mathrm{Attention}(Q,K,V)=\mathrm{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V
 $$
 
-- **Q / K**：用点积得到位置之间的匹配分数。
-- **缩放与 softmax**：把分数转为归一化权重。
-- **V**：按这些权重汇总信息，得到新的位置表示。
+::explanation::
+
+- **Q / K** 用点积得到位置之间的匹配分数。
+- **缩放与 softmax** 把分数转为归一化权重。
+- **V** 按这些权重汇总信息，得到新的位置表示。
+
+::note::
 
 <p class="bit-note">来源：论文 §3.2.1，式 (1)。Q、K 的末维为 dₖ；softmax 沿 key 维度计算。</p>
 
@@ -62,6 +79,7 @@ $$
 
 ---
 layout: image-left
+titleStyle: plain
 section: Transformer 架构
 sectionNumber: '02'
 caption: 原论文图 1 · Vaswani et al., arXiv:1706.03762v7
@@ -91,6 +109,7 @@ import architecture from './docs/attention/architecture.png'
 section: Transformer 架构
 sectionNumber: '02'
 layout: two-cols
+titleStyle: rail
 ---
 
 # 多头注意力：多个投影子空间并行计算
@@ -120,7 +139,7 @@ $$
 ---
 section: Transformer 架构
 sectionNumber: '02'
-layout: two-cols
+layout: compare
 ---
 
 # 位置与掩码：补充顺序，控制可见信息
@@ -150,26 +169,47 @@ $$
 <!-- 位置编码给模型位置线索；掩码约束能看到哪些位置，两者不能互相替代。讲解右移时可用“开始标记+已有目标词预测下一个词”的例子，不需要虚构注意力权重。 -->
 
 ---
+layout: grid
 section: 实验设置
 sectionNumber: '03'
 ---
 
-# 实验设置
+# 实验设置：四个复现要素
 
-| 项目 | 论文中的设置 |
-| --- | --- |
-| 翻译任务 | WMT 2014 · 英德、英法 |
-| 训练语料规模 | 约 450 万 / 3600 万句对 |
-| 硬件 | 8 张 NVIDIA P100 |
-| Base / Big 时长 | 约 12 小时 / 3.5 天 |
+::first::
 
-<p class="bit-note">来源：论文 §5、表 2。时间为原论文环境下的报告值，不能直接当作当前硬件的速度。</p>
+## 翻译任务
 
-<!-- 英德采用BPE、共享约37000词表；英法约32000 word-piece词表。原论文使用Adam与4000步warmup，base训练100K步、big训练300K步。表2比较基于newstest2014，下一页只讨论层复杂度，不将其直接换成实测训练加速比。 -->
+WMT 2014 英德与英法翻译。
+
+::second::
+
+## 训练语料
+
+约 450 万 / 3600 万句对，分别对应英德与英法。
+
+::third::
+
+## 计算环境
+
+8 张 NVIDIA P100 GPU。
+
+::fourth::
+
+## 训练时长
+
+Base 约 12 小时；Big 约 3.5 天。
+
+::note::
+
+来源：论文 §5、表 2。时长仅对应原论文环境，不能直接作为当前硬件的速度。
+
+<!-- 英德采用BPE、共享约37000词表；英法约32000 word-piece词表。原论文使用Adam与4000步warmup，base训练100K步、big训练300K步。 -->
 
 ---
 section: 实验设置
 sectionNumber: '03'
+titleStyle: band
 ---
 
 # 并行性优势，不等于所有长度都更省计算
@@ -186,81 +226,106 @@ sectionNumber: '03'
 <!-- 这是结构分析，不是同硬件实测速度。论文指出n小于d时，自注意力的计算复杂度相对循环层更有利。生成过程也不能从O(1)顺序层内操作直接推断为一次输出完整句子。 -->
 
 ---
+layout: sidebar
+eyebrow: TRANSLATION RESULTS
 section: 实验结果
 sectionNumber: '03'
-layout: two-cols
 ---
 
-# 翻译结果：按同一测试集读取 BLEU
+# 翻译结果
 
-::left::
+::summary::
 
-## 英德 · newstest2014
+统一读取 v7 表 2 的 newstest2014 测试集 BLEU；分数越高越好。
+
+::body::
+
+<BitMetrics :items="[
+  { value: '28.4', label: 'Big · 英德 BLEU', detail: 'newstest2014' },
+  { value: '41.8', label: 'Big · 英法 BLEU', detail: 'newstest2014', accent: true }
+]" />
 
 <BitBarChart :items="[
   { label: 'ConvS2S', value: 25.16 },
   { label: 'MoE', value: 26.03 },
   { label: 'Base', value: 27.3 },
   { label: 'Big', value: 28.4, accent: true }
-]" :max="30" label="表2英德翻译BLEU比较">
-BLEU 分数 · 越高越好
-</BitBarChart>
+]" :max="30" label="表2英德翻译BLEU比较" />
 
-::right::
-
-## 英法 · newstest2014
-
-| 模型 | BLEU |
-| --- | ---: |
-| Transformer Base | 38.1 |
-| Transformer Big | **41.8** |
-
-<p class="bit-note">本页统一采用 v7 表 2 数值；不同语向、测试集和模型规模不混合比较。</p>
-
-<!-- 来源：原论文arXiv v7表2。英德Big比Base高1.1个BLEU分数点；不是准确率提高1.1%。表2英法Big=41.8，但§6.1正文有41.0的不同表述，本示例明确采用表2，不据此重新解释或修改原论文数据。 -->
+<!-- 来源：原论文arXiv v7表2。英法Base=38.1。英德Big比Base高1.1个BLEU分数点，不是准确率提高1.1%。表2英法Big=41.8，但§6.1正文有41.0的不同表述，本示例明确采用表2，不据此重新解释或修改原论文数据。 -->
 
 ---
+layout: focus
 section: 实验结果
 sectionNumber: '03'
 ---
 
 # 消融：更多注意力头不必然更好
 
-| 设置 | 注意力头数 | 每头 key / value 维度 | 开发集 BLEU |
-| --- | ---: | ---: | ---: |
-| 单头 | 1 | 512 | 24.9 |
-| Base | 8 | 64 | **25.8** |
-| 更多头 | 32 | 16 | 25.4 |
+::focus::
 
-<BitCallout title="证据支持到哪里">这组设置支持多头的作用，但头数与每头维度同时变化，不能概括成“头越多越好”。</BitCallout>
+<BitMetrics :items="[
+  { value: '24.9', label: '1 个头', detail: '每头 key / value 维度 512' },
+  { value: '25.8', label: '8 个头 · Base', detail: '每头 key / value 维度 64' },
+  { value: '25.4', label: '32 个头', detail: '每头 key / value 维度 16', accent: true }
+]" />
 
-<p class="bit-note">来源：论文表 3 (A)。英德 newstest2013 开发集；与前页测试集分数不能直接比较。</p>
+::explanation::
 
-<!-- 表3还报告16头为25.8。本页选择1、8、32头作紧凑对比，不暗示完整搜索全部超参数。最后一句为阅读分析：需要控制维度与预算再讨论头数因果效应。 -->
+这组设置支持多头的作用，但头数与每头维度同时变化，不能概括成“头越多越好”。
+
+::note::
+
+来源：论文表 3 (A)。数值为英德 newstest2013 **开发集 BLEU**，不能与前页测试集直接比较。
+
+<!-- 表3还报告16头为25.8。本页选择1、8、32头作紧凑对比，不暗示完整搜索全部超参数。解读为阅读分析，需要控制维度与预算再讨论头数因果效应。 -->
 
 ---
+layout: steps
 section: 讨论与局限
 sectionNumber: '04'
 ---
 
 # 讨论与局限
 
-- **长序列成本**：标准全注意力有二次复杂度。
-- **自回归推理**：训练并行性不消除逐步生成依赖。
-- **证据范围**：翻译与句法分析实验，不能直接代表所有任务。
+::first::
 
-<BitCallout title="阅读启发">分开检验表达能力、并行性和实际运行成本，避免用一个总分解释全部收益。</BitCallout>
+## 长序列成本
 
-<p class="bit-note">依据：论文 §4、§6–7；“证据范围”和阅读启发为本示例的分析。</p>
+标准全注意力的二次复杂度，仍带来内存与计算开销。
 
-<!-- 讨论只以原论文为边界，不把后来的模型、长上下文算法或现代训练规模当成作者当年已经完成的结果。若继续扩展，可增加后续工作的独立参考页。 -->
+::second::
+
+## 自回归推理
+
+训练时的并行性，不消除生成时逐步预测的依赖。
+
+::third::
+
+## 证据范围
+
+翻译与句法分析实验，不能直接代表所有任务。
+
+::note::
+
+依据：论文 §4、§6–7。“证据范围”为阅读分析；应分开检验表达能力、并行性和实际成本。
+
+<!-- 讨论只以原论文为边界，不把后来的模型、长上下文算法或现代训练规模当成作者当年已经完成的结果。 -->
 
 ---
+layout: sidebar
+eyebrow: TAKEAWAY
 section: 讨论与局限
 sectionNumber: '04'
 ---
 
-# 结论与参考资料
+# 结论与参考
+
+::summary::
+
+用注意力组织序列内部交互。
+
+::body::
 
 ## 一个结构上的改变
 

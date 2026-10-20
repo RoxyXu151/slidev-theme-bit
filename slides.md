@@ -34,11 +34,17 @@ subtitle: BACKGROUND
 # 研究背景
 
 ---
+layout: sidebar
+eyebrow: RESEARCH QUESTION
 section: 研究背景
 sectionNumber: '01'
 ---
 
-# 问题与研究目标
+# 研究目标
+
+::body::
+
+## 问题与研究目标
 
 - 研究对象与应用背景：[待补充]
 - 已有研究的不足：[待补充，并添加文献来源]
@@ -48,6 +54,7 @@ sectionNumber: '01'
 
 ---
 layout: two-cols
+titleStyle: band
 section: 研究方法
 sectionNumber: '02'
 ---
@@ -73,6 +80,7 @@ sectionNumber: '02'
 ---
 section: 实验与分析
 sectionNumber: '03'
+titleStyle: rail
 ---
 
 # 实验设置
@@ -86,6 +94,7 @@ sectionNumber: '03'
 
 ---
 layout: figure
+titleStyle: plain
 section: 实验与分析
 sectionNumber: '03'
 caption: 请替换为真实结果，并填写数据来源、样本量和误差范围
@@ -98,11 +107,15 @@ caption: 请替换为真实结果，并填写数据来源、样本量和误差�
 <BitCallout title="实验结果待补充">将真实实验图放入 public/results.png，然后用 Markdown 图片语法或 image 字段引用。解释主要发现、失败案例和适用条件。</BitCallout>
 
 ---
+layout: sidebar
+eyebrow: CONCLUSION
 section: 总结与展望
 sectionNumber: '04'
 ---
 
 # 总结与展望
+
+::body::
 
 ## 研究工作
 

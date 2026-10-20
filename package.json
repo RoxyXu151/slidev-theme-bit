@@ -1,6 +1,6 @@
 {
   "name": "slidev-theme-bit",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "北京理工大学 Slidev 学术答辩主题 · Beijing Institute of Technology",
   "type": "module",
   "license": "MIT",
@@ -79,7 +79,7 @@
       "aspectRatio": "16/9",
       "canvasWidth": 1280,
       "transition": "fade",
-      "favicon": "",
+      "favicon": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23006c39'/%3E%3C/svg%3E",
       "fonts": {
         "provider": "none",
         "sans": "Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif",

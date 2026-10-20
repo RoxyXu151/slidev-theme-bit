@@ -37,6 +37,67 @@
 .bit-main { position: absolute; inset: 109px 70px 70px; }
 .bit-main > h1:first-child, .bit-columns-heading h1, .bit-image-heading h1 { margin-bottom: 28px; padding-bottom: 18px; position: relative; }
 .bit-main > h1:first-child::after, .bit-columns-heading h1::after, .bit-image-heading h1::after { content: ''; position: absolute; width: 48px; height: 4px; background: var(--bit-accent); left: 0; bottom: 0; }
+/* Title treatments are independent of the shared university header. */
+.bit-layout-heading h1 { position: relative; margin-bottom: 28px; padding-bottom: 18px; }
+.bit-title-classic .bit-layout-heading h1::after { content: ''; position: absolute; left: 0; bottom: 0; width: 48px; height: 4px; background: var(--bit-accent); }
+.bit-title-plain :is(.bit-main > h1:first-child, .bit-columns-heading h1, .bit-image-heading h1, .bit-layout-heading h1) { padding: 0; margin-bottom: 30px; font-weight: 600; }
+.bit-title-rail :is(.bit-main > h1:first-child, .bit-columns-heading h1, .bit-image-heading h1, .bit-layout-heading h1) { padding: 0 0 0 22px; border-left: 6px solid var(--bit-green); margin-bottom: 30px; }
+.bit-title-band :is(.bit-main > h1:first-child, .bit-columns-heading h1, .bit-image-heading h1, .bit-layout-heading h1) { padding: 12px 24px; margin-bottom: 28px; background: var(--bit-green); color: white; font-size: 36px; font-weight: 600; }
+:is(.bit-title-plain, .bit-title-rail, .bit-title-band) :is(.bit-main > h1:first-child, .bit-columns-heading h1, .bit-image-heading h1, .bit-layout-heading h1)::after { content: none; }
+
+/* Compositions adapted from the supplied PPT: 75, 79, 80, 99 and 116. */
+:is(.bit-compare, .bit-steps, .bit-grid, .bit-focus) .bit-main { display: flex; flex-direction: column; }
+.bit-layout-heading { flex-shrink: 0; }
+.bit-layout-note { margin-top: 18px; flex-shrink: 0; }
+.slidev-layout .bit-layout-note p { color: var(--bit-muted); font-size: 18px; line-height: 1.6; }
+.bit-compare-panels { display: grid; grid-template-columns: 1fr 1fr; flex: 1; min-height: 0; border: 1px solid var(--bit-green); }
+.bit-compare-panels > div { position: relative; padding: 28px 36px; min-width: 0; }
+.bit-compare-primary { background: var(--bit-green); color: white; }
+.bit-compare-primary::after { content: ''; position: absolute; right: -18px; top: calc(50% - 18px); border: 18px solid transparent; border-left-color: var(--bit-green); border-right: 0; }
+.bit-compare-primary :is(h2, h3, strong, a), .bit-compare-primary li::marker { color: white; }
+.bit-compare-secondary h2 { color: var(--bit-accent); }
+.bit-compare-panels h2:first-child { margin-top: 0; }
+.bit-compare-panels :is(p, li) { font-size: 24px; line-height: 1.75; }
+.bit-step-columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 76px; flex: 1; padding-top: 12px; }
+.bit-step-columns > div { position: relative; }
+.bit-step-columns > div + div::before { content: '›'; position: absolute; left: -51px; top: 110px; font: 65px/1 sans-serif; color: var(--bit-green); font-weight: 200; }
+.bit-step-number { display: block; color: var(--bit-accent); font: 52px/1.2 'Century Gothic', sans-serif; margin-bottom: 24px; }
+.bit-step-columns h2 { margin: 0 0 20px; }
+.bit-step-columns :is(p, li) { font-size: 24px; line-height: 1.8; }
+.bit-grid-panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 18px; flex: 1; min-height: 0; }
+.bit-grid-panels > div { border: 1px solid var(--bit-green); padding: 22px 28px; min-width: 0; }
+.bit-grid-panels h2 { font-size: 27px; margin: 0 0 12px; color: var(--bit-accent); }
+.bit-grid-panels :is(p, li) { font-size: 23px; line-height: 1.7; }
+.bit-grid-panels ul { margin: 8px 0 0; }
+.bit-sidebar .bit-main { display: grid; grid-template-columns: 30% minmax(0, 1fr); gap: 50px; }
+.bit-sidebar-panel { background: var(--bit-green); color: white; padding: 38px 30px; border-bottom: 6px solid var(--bit-accent); }
+.bit-sidebar-panel h1 { font-size: 38px; font-weight: 500; line-height: 1.5; margin: 25px 0; }
+.bit-eyebrow { font: 17px/1.5 'Century Gothic', sans-serif; letter-spacing: .13em; color: #d4e7dc; }
+.bit-sidebar-summary { margin-top: 32px; padding-top: 24px; border-top: 1px solid #ffffff55; }
+.bit-sidebar-summary p { font-size: 23px; color: #e2eee6; line-height: 1.8; }
+.bit-sidebar-body { align-self: center; min-width: 0; }
+.bit-sidebar-body h2:first-child { margin-top: 0; }
+.bit-sidebar-body :is(p, li) { font-size: 24px; }
+.bit-focus-stage { flex: 1; min-height: 100px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-block: 1px solid var(--bit-line); padding: 20px 0; color: var(--bit-green); }
+.bit-focus-stage .katex-display { font-size: 1.35em; margin: 0; max-width: 100%; }
+.bit-focus-explanation { padding-top: 24px; }
+.bit-focus-explanation > ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px; list-style: none; padding: 0; margin: 0; }
+.bit-focus-explanation li { margin: 0; font-size: 23px; line-height: 1.7; padding: 0; }
+.bit-focus-explanation li strong { display: block; margin-bottom: 8px; font-size: 25px; }
+.bit-metrics { display: grid; width: 100%; gap: 30px; margin: 20px 0; }
+.bit-metrics > div { min-width: 0; text-align: center; padding: 18px 12px 22px; border-bottom: 3px solid var(--bit-green); }
+.bit-metrics dt { font-size: 22px; line-height: 1.5; color: var(--bit-muted); }
+.bit-metrics dd { margin: 12px 0; font: 58px/1.25 'Century Gothic', sans-serif; color: var(--bit-green); }
+.bit-metrics .bit-metric-detail { font-family: inherit; font-size: 19px; line-height: 1.5; color: var(--bit-muted); margin: 0; }
+.bit-metrics .bit-metric-accent { border-color: var(--bit-accent); }
+.bit-metric-accent dd { color: var(--bit-accent); }
+.bit-story-image { position: absolute; inset: 0 auto 0 0; width: 58%; margin: 0; display: flex; flex-direction: column; }
+.bit-story-image > img { width: 100%; flex: 1; min-height: 0; object-fit: contain; }
+.bit-story-image figcaption { font-size: 17px; line-height: 1.5; margin-top: 12px; color: var(--bit-muted); max-width: 90%; }
+.bit-story-copy { position: absolute; left: 54%; right: 0; top: 40px; bottom: 40px; padding: 32px 32px 32px 52px; background: white; box-shadow: 0 3px 22px #193e231a; border-top: 4px solid var(--bit-green); }
+.bit-story-copy .bit-layout-heading h1 { font-size: 34px; margin-bottom: 24px; }
+.bit-story-copy :is(p, li) { font-size: 23px; line-height: 1.75; }
+.bit-story-copy h2 { font-size: 26px; margin: 20px 0 12px; }
 .bit-footer { position: absolute; bottom: 0; left: 0; right: 0; height: 34px; padding-left: 50px; display: flex; align-items: center; gap: 30px; background: var(--bit-green); color: white; font-size: 14px; letter-spacing: 2px; }
 .bit-motto { margin-left: auto; opacity: .78; }
 .bit-page { height: 34px; padding: 0 17px; display: flex; align-items: center; background: var(--bit-accent); letter-spacing: 0; min-width: 78px; justify-content: center; }

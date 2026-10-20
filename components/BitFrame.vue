@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { useBitTheme } from '../composables/useBitTheme'
 import BitLogo from './BitLogo.vue'
 import building from '../assets/building.png'
-const props = defineProps<{ kind?: string }>()
+const props = defineProps<{ kind?: string; titleStyle?: string }>()
 const { options, context } = useBitTheme()
 const frameStyle = computed(() => ({
   '--bit-green': options.value.primary || '#006c39',
@@ -12,7 +12,7 @@ const frameStyle = computed(() => ({
 </script>
 
 <template>
-  <div class="slidev-layout bit-frame" :class="[`bit-${props.kind || 'default'}`, `bit-header-${options.headerStyle}`]" :style="frameStyle">
+  <div class="slidev-layout bit-frame" :class="[`bit-${props.kind || 'default'}`, `bit-header-${options.headerStyle}`, `bit-title-${options.titleStyle || props.titleStyle || 'classic'}`]" :style="frameStyle">
     <header class="bit-header" aria-hidden="true">
       <span class="bit-section-marker">{{ options.sectionNumber || '' }}</span>
       <span class="bit-section-label">{{ options.section || '' }}</span>
